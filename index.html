@@ -1,0 +1,69 @@
+<html>
+    <script src = "app.js"></script>
+    <style>
+        .tb { border-collapse: collapse; width:100%; }
+        .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+        .tb th { background-color: lightblue; }
+      </style>
+    <head>
+        <title> UAS Status Board </title>
+    </head>
+    <table class="tb" id = 'AVs'>
+        <tr class="adminNumber">
+          <th style = "background-color: white; border: white;">AV's</th>
+        </tr>
+        <tr class = 'status'>
+          <td>Status</td>
+        </tr>
+        <tr class = 'hours'>
+          <td>Hours</td>
+        </tr>
+        <tr class = '25 hours'>
+          <td>25 Hours</td>
+        </tr>
+        <tr class = '50 hours'>
+            <td>50 Hours</td>
+        </tr>
+        <tr class = '125 hours'>
+            <td>125 Hours</td>
+        </tr>
+        <tr class = '250 hours'>
+            <td>250 Hours</td>
+        </tr>
+        <tr class = '500 hours'>
+            <td>500 Hours</td>
+        </tr>
+        <tr class = 'Mini-T up'>
+          <td>Mini-T up</td>
+        </tr>
+        <tr class = 'Mini-T down'>
+           <td>Mini-T down</td>
+        </tr>
+        <tr class = 'Mini-C up'>
+           <td>Mini-C up</td>
+        </tr>
+        <tr class = 'UHF'>
+           <td>UHF</td>
+        </tr>
+          
+    </table> <br>
+    <form> AV input<br>
+      <input type = 'text' id = 'adminNumber'>Admin Number<br>
+      <input type = 'text' id = 'status'>Status<br>
+      <input type = 'text' id = 'hours'>Hours<br>
+      <input type = 'text' id = '25 hours'>Hours to 25 Hour<br>
+      <input type = 'text' id = '50 hours'>Hours to 50 Hour<br>
+      <input type = 'text' id = '125 hours'>Hours to 125 Hour<br>
+      <input type = 'text' id = '250 hours'>Hours to 250 Hour<br>
+      <input type = 'text' id = '500 hours'>Hours to 500 Hour<br>
+      <input type = 'text' id = 'Mini-T up'>Mini-T up<br>
+      <input type = 'text' id = 'Mini-T down'>Mini-T down<br>
+      <input type = 'text' id = 'Mini-C up'>Mini-T down<br>
+      <input type = 'text' id = 'UHF'>UHF<br>
+
+      <button type = 'button' onclick="avSubmit()">Create/Edit</button>
+      <button type = 'button' onclick="removeAV()">Remove AV</button>
+    </form>
+    <button type="button" onclick="avSubmit(123)">test</button>
+    <h1>LAUs</h1>
+</html>
