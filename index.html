@@ -1,5 +1,5 @@
 <html>
-    <script src = "app.js"></script>
+  <script src = "app.js"></script>
     <style>
         .tb { border-collapse: collapse; width:100%; }
         .tb th, .tb td { padding: 5px; border: solid 1px #777; }
@@ -9,57 +9,57 @@
         <title> UAS Status Board </title>
     </head>
     <table class="tb" id = 'AVs'>
-        <tr class="adminNumber">
-          <th style = "background-color: white; border: white;">AV's</th>
+        <tr id="adminNumber">
+          <th>AV's</th>
         </tr>
-        <tr class = 'status'>
+        <tr id = 'status'>
           <td>Status</td>
         </tr>
-        <tr class = 'hours'>
+        <tr id = 'hours'>
           <td>Hours</td>
         </tr>
-        <tr class = '25 hours'>
+        <tr id = 'twentyFive'>
           <td>25 Hours</td>
         </tr>
-        <tr class = '50 hours'>
+        <tr id = 'fifty'>
             <td>50 Hours</td>
         </tr>
-        <tr class = '125 hours'>
+        <tr id = 'oneTwentyFive'>
             <td>125 Hours</td>
         </tr>
-        <tr class = '250 hours'>
+        <tr id = 'twoFifty'>
             <td>250 Hours</td>
         </tr>
-        <tr class = '500 hours'>
+        <tr id = 'fiveHundred'>
             <td>500 Hours</td>
         </tr>
-        <tr class = 'Mini-T up'>
+        <tr id = 'miniTUp'>
           <td>Mini-T up</td>
         </tr>
-        <tr class = 'Mini-T down'>
+        <tr id = 'miniTDown'>
            <td>Mini-T down</td>
         </tr>
-        <tr class = 'Mini-C up'>
+        <tr id = 'miniCUp'>
            <td>Mini-C up</td>
         </tr>
-        <tr class = 'UHF'>
+        <tr id = 'uhf'>
            <td>UHF</td>
         </tr>
           
     </table> <br>
     <form> AV input<br>
-      <input type = 'text' id = 'adminNumber'>Admin Number<br>
-      <input type = 'text' id = 'status'>Status<br>
-      <input type = 'text' id = 'hours'>Hours<br>
-      <input type = 'text' id = '25 hours'>Hours to 25 Hour<br>
-      <input type = 'text' id = '50 hours'>Hours to 50 Hour<br>
-      <input type = 'text' id = '125 hours'>Hours to 125 Hour<br>
-      <input type = 'text' id = '250 hours'>Hours to 250 Hour<br>
-      <input type = 'text' id = '500 hours'>Hours to 500 Hour<br>
-      <input type = 'text' id = 'Mini-T up'>Mini-T up<br>
-      <input type = 'text' id = 'Mini-T down'>Mini-T down<br>
-      <input type = 'text' id = 'Mini-C up'>Mini-T down<br>
-      <input type = 'text' id = 'UHF'>UHF<br>
+      <input type = 'text' id = 'adminNumberInput'>Admin Number<br>
+      <input type = 'text' id = 'statusInput'>Status<br>
+      <input type = 'text' id = 'hoursInput'>Hours<br>
+      <input type = 'text' id = 'twentyFiveInput'>Hours to 25 Hour<br>
+      <input type = 'text' id = 'fiftyInput'>Hours to 50 Hour<br>
+      <input type = 'text' id = 'oneTwentyFiveInput'>Hours to 125 Hour<br>
+      <input type = 'text' id = 'twoFiftyInput'>Hours to 250 Hour<br>
+      <input type = 'text' id = 'fiveHundredInput'>Hours to 500 Hour<br>
+      <input type = 'text' id = 'miniTUpInput'>Mini-T up<br>
+      <input type = 'text' id = 'miniTDownInput'>Mini-T down<br>
+      <input type = 'text' id = 'miniCUpInput'>Mini-T down<br>
+      <input type = 'text' id = 'uhfInput'>UHF<br>
 
       <button type = 'button' onclick="avSubmit()">Create/Edit</button>
       <button type = 'button' onclick="removeAV()">Remove AV</button>
