@@ -2,11 +2,28 @@
   <script src = "app.js"></script>
     <style>
         .tb { border-collapse: collapse; width:100%; }
-        .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+        .tb th, .tb td { padding: 5px; border: solid 1px #1f1f1f; background-color:beige;}
         .tb th { background-color: lightblue; }
+        .column1 {
+          box-sizing: border-box;
+          float: left;
+          width: 50%;
+        }
+        .column2 {
+          box-sizing: border-box;
+          float: right;
+          width: 50%;
+        }
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
       </style>
     <head>
         <title> UAS Status Board </title>
+        <small style="float: right" id='update'></small>
+
     </head>
     <table class="tb" id = 'AVs'>
         <tr id="adminNumber">
@@ -47,23 +64,41 @@
         </tr>
           
     </table> <br>
-    <form> AV input<br>
-      <input type = 'text' id = 'adminNumberInput'>Admin Number<br>
-      <input type = 'text' id = 'statusInput'>Status<br>
-      <input type = 'text' id = 'hoursInput'>Hours<br>
-      <input type = 'text' id = 'twentyFiveInput'>Hours to 25 Hour<br>
-      <input type = 'text' id = 'fiftyInput'>Hours to 50 Hour<br>
-      <input type = 'text' id = 'oneTwentyFiveInput'>Hours to 125 Hour<br>
-      <input type = 'text' id = 'twoFiftyInput'>Hours to 250 Hour<br>
-      <input type = 'text' id = 'fiveHundredInput'>Hours to 500 Hour<br>
-      <input type = 'text' id = 'miniTUpInput'>Mini-T up<br>
-      <input type = 'text' id = 'miniTDownInput'>Mini-T down<br>
-      <input type = 'text' id = 'miniCUpInput'>Mini-T down<br>
-      <input type = 'text' id = 'uhfInput'>UHF<br>
 
-      <button type = 'button' onclick="avSubmit()">Create/Edit</button>
-      <button type = 'button' onclick="removeAV()">Remove AV</button>
-    </form>
-    <button type="button" onclick="avSubmit(123)">test</button>
-    <h1>LAUs</h1>
+   <body>
+      <div class="row">
+          <div class="column1">
+              <p>
+                  <input type = 'text' id = 'adminNumberInput'>Admin Number<br>
+                  <input type = 'text' id = 'statusInput'>Status<br>
+                  <input type = 'text' id = 'hoursInput'>Hours<br>
+                  <input type = 'text' id = 'twentyFiveInput'>Hours to 25 Hour<br>
+                  <input type = 'text' id = 'fiftyInput'>Hours to 50 Hour<br>
+                  <input type = 'text' id = 'oneTwentyFiveInput'>Hours to 125 Hour<br>
+                  <input type = 'text' id = 'twoFiftyInput'>Hours to 250 Hour<br>
+                  <input type = 'text' id = 'fiveHundredInput'>Hours to 500 Hour<br>
+                  <input type = 'text' id = 'miniTUpInput'>Mini-T up<br>
+                  <input type = 'text' id = 'miniTDownInput'>Mini-T down<br>
+                  <input type = 'text' id = 'miniCUpInput'>Mini-T down<br>
+                  <input type = 'text' id = 'uhfInput'>UHF<br>
+                  <button type = 'button' onclick="avSubmit()">Create/Edit</button>
+                  <button type = 'button' onclick="removeAv()">Remove AV</button>
+              </p>
+          </div>
+        <div class="column2">
+          <p>
+            <textarea style="height: 250px; width: 75%;" id = 'avNotes'>Notes</textarea>
+          </p>
+        </div>
+    </div>
+    <table class="tb" id = 'Laus'>
+      <tr id="adminNumber">
+        <th>LAUs</th>
+      </tr>
+      <tr id = 'lauStatus'>
+        <td>Status</td>
+      </tr>
+      <tr id = 'Launches'>
+        <td>Launches</td>
+      </tr>
 </html>
