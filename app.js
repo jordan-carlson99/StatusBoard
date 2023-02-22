@@ -1,6 +1,13 @@
+var intervalId = window.setInterval(function(){
+    for(var i = 0; i < avList.length; i++) {
+        avList[i].read()
+        document.getElementById('update').textContent = `Updated ${Date()}`
+    }
+}, 60000);
+
 class AV {
     constructor (adminNumber, hours, status, twentyFive, fifty, oneTwentyFive, twoFifty, fiveHundred, miniTUp, miniTDown, miniCUp, uhf, notes) {
-        this.adminNumber = adminNumber ||  ' '
+        this.adminNumber = adminNumber ||  'Untitled AV'
         this.hours = hours || 0
         this.status = status || 'X'
         this.twentyFive = twentyFive || 25
@@ -13,15 +20,16 @@ class AV {
         this. miniCUp = miniCUp || '00.000'
         this.uhf = uhf || '000.0000'
         this.notes = notes || ''
+        this.type = 'AV'
     }
 
     read () {
         let adminNo = this.adminNumber 
         if (document.getElementById)
         if (document.getElementById(adminNo)) {
-            this.append()
+            this.append(avList)
         } else {
-            this.create()
+            this.create(avList)
         }
     }
 
@@ -77,10 +85,8 @@ class AV {
         // method for adding total hours so 25,50,125,250,and 500 update
     }
 }
-
 let arrayOfVars = ['hours', 'status', 'twentyFive', 'fifty', 'oneTwentyFive',
 'twoFifty', 'fiveHundred', 'miniTDown', 'miniTUp', 'miniCUp', 'uhf']
-
 let avList = []
 
 function avCreate () {
@@ -99,12 +105,10 @@ function avCreate () {
     let notes = document.getElementById('avNotes').value
     const av = new AV (adminNumber, hours, status, twentyFive, fifty, oneTwentyFive, twoFifty, fiveHundred,miniTUp, miniTDown, miniCUp, uhf, notes)
     document.getElementById('avInputs').innerHTML = ''
-    av.read()
-
-    console.log(avList)
+    av.read(avList)
 }
 
-function removeAv () {
+function avRemove () {
     let adminNumber = document.getElementById('avRemoveInput')
     for (var i = 0; i < avList.length; i++) {
         if (avList[i].adminNumber === adminNumber.value) {
@@ -117,23 +121,7 @@ function removeAv () {
     }
 }
 
-function avEdit () {
-    let cells = document.getElementsByClassName('avDataCell')
-    for (var i = 0; i < cells.length; i++) {
-        let cell = cells[i]
-        let inputCell = document.createElement('input')
-        cell.replaceWith(inputCell)
-    }
-}
-
-var intervalId = window.setInterval(function(){
-    for(var i = 0; i < avList.length; i++) {
-        avList[i].read()
-        document.getElementById('update').textContent = `Updated ${Date()}`
-    }
-  }, 60000);
-
-  function inputMenu(bool, tailNo) {
+function avInputMenu(bool, tailNo) {
     let inputTable = document.getElementById('avInputs')
     let tailNumber = document.createElement('input')
     tailNumber.type = 'text'
@@ -171,18 +159,17 @@ var intervalId = window.setInterval(function(){
     submitButton.onclick = function() {avCreate()}
     submitButton.textContent = 'Submit'
     inputTable.appendChild(submitButton)
-  }
+}
 
+// LAU -------------------------------------------------------------------------------------------------------------------------------
 
-// LAUNCHERS ------------------------------------------------------------------------------------------------------------
-
-
-  class Lau {
+class Lau {
     constructor (adminNumber, status, launches, notes) {
-        this.adminNumber = adminNumber ||  ' '
+        this.adminNumber = adminNumber ||  'Untitled Launcher'
         this.launches = launches || 0
         this.status = status || 'X'
         this.notes = notes || ''
+        this.type = 'Lau'
     }
 
     lauRead () {
@@ -221,7 +208,7 @@ var intervalId = window.setInterval(function(){
         let lauNo = this.adminNumber
         for(var i = 0; i < lauList.length; i++) {
             if (lauList[i].adminNumber === lauNo) {
-                let oldLau = avList[i]
+                let oldLau = lauList[i]
                 for (var i = 0; i < arrayOfVars.length; i++) {
                     let updated = this[lauArrayOfVars[i]]
                     document.getElementById(`${lauNo} ${lauArrayOfVars[i]}`).textContent = `${updated}`
@@ -237,15 +224,14 @@ var intervalId = window.setInterval(function(){
             for (var i = 0; i < lauArrayOfVars.length; i++) {
                 document.getElementById(`${this.adminNumber} ${lauArrayOfVars[i]}`).remove()
             }
-            alert(`AV ${this.adminNumber} Removed`)
+            alert(`Launcher ${this.adminNumber} Removed`)
         } else {
-            alert(`AV ${this.adminNumber} doesnt exist!`)
+            alert(`Launcher ${this.adminNumber} doesnt exist!`)
         }
     }
 }
-
 let lauArrayOfVars = ['launches', 'status']
-lauList = []
+let lauList = []
 
 function lauCreate () {
     let adminNumber = document.getElementById('lauAdminNumberInput').value 
@@ -253,9 +239,8 @@ function lauCreate () {
     let launches = document.getElementById('laulaunchesInput').value
     let notes = document.getElementById('lauNotes').value
     const lau = new Lau (adminNumber, status, launches, notes)
-    document.getElementById('avInputs').innerHTML = ''
+    document.getElementById('lauInputs').innerHTML = ''
     lau.lauRead()
-    console.log(lauList)
 }
 
 function lauInputMenu(bool, lauNo) {
@@ -275,9 +260,9 @@ function lauInputMenu(bool, lauNo) {
             inputTable.appendChild(inputBox)
         }
     } else if(bool = true){
-        for (var i = 0; i < avList.length; i++) {
-            if (avList[i].adminNumber === lauNo) {
-                var currentData = avList[i]
+        for (var i = 0; i < lauList.length; i++) {
+            if (lauList[i].adminNumber === lauNo) {
+                var currentData = lauList[i]
                 break
             }
         }
@@ -296,4 +281,17 @@ function lauInputMenu(bool, lauNo) {
     submitButton.onclick = function() {lauCreate()}
     submitButton.textContent = 'Submit'
     inputTable.appendChild(submitButton)
-  }
+}
+
+function lauRemove () {
+    let adminNumber = document.getElementById('lauRemoveInput')
+    for (var i = 0; i < lauList.length; i++) {
+        if (lauList[i].adminNumber === adminNumber.value) {
+            let result = confirm(`Remove ${lauList[i].adminNumber}?`)
+            if (result) {
+                lauList[i].lauRemove()
+                lauList.splice(i,1)
+            }
+        }
+    }
+}
