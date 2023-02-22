@@ -1,5 +1,4 @@
 <html>
-  <script src = "app.js"></script>
     <style>
         .tb { border-collapse: collapse; width:100%; }
         .tb th, .tb td { padding: 5px; border: solid 1px #1f1f1f; background-color:beige;}
@@ -74,49 +73,52 @@
     <head>
         <title> UAS Status Board </title>
         <small style="float: right" id='update'></small>
-
+        <script src="app.js"></script>
     </head>
-    <table class="tb" id = 'AVs'>
-        <tr id="adminNumber">
-          <th>AV's</th>
-        </tr>
-        <tr id = 'status'>
-          <td>Status</td>
-        </tr>
-        <tr id = 'hours'>
-          <td>Hours</td>
-        </tr>
-        <tr id = 'twentyFive'>
-          <td>25 Hours</td>
-        </tr>
-        <tr id = 'fifty'>
-            <td>50 Hours</td>
-        </tr>
-        <tr id = 'oneTwentyFive'>
-            <td>125 Hours</td>
-        </tr>
-        <tr id = 'twoFifty'>
-            <td>250 Hours</td>
-        </tr>
-        <tr id = 'fiveHundred'>
-            <td>500 Hours</td>
-        </tr>
-        <tr id = 'miniTUp'>
-          <td>Mini-T up</td>
-        </tr>
-        <tr id = 'miniTDown'>
-           <td>Mini-T down</td>
-        </tr>
-        <tr id = 'miniCUp'>
-           <td>Mini-C up</td>
-        </tr>
-        <tr id = 'uhf'>
-           <td>UHF</td>
-        </tr>
-          
-    </table> <br>
 
-   <body>
+  <div>
+    <script src="av.js"></script>
+    <table class="tb" id = 'AVs'>
+      <tr id="adminNumber">
+        <th>AV's</th>
+      </tr>
+      <tr id = 'status'>
+        <td>Status</td>
+      </tr>
+      <tr id = 'hours'>
+        <td>Hours</td>
+      </tr>
+      <tr id = 'twentyFive'>
+        <td>25 Hours</td>
+      </tr>
+      <tr id = 'fifty'>
+          <td>50 Hours</td>
+      </tr>
+      <tr id = 'oneTwentyFive'>
+          <td>125 Hours</td>
+      </tr>
+      <tr id = 'twoFifty'>
+          <td>250 Hours</td>
+      </tr>
+      <tr id = 'fiveHundred'>
+          <td>500 Hours</td>
+      </tr>
+      <tr id = 'miniTUp'>
+        <td>Mini-T up</td>
+      </tr>
+      <tr id = 'miniTDown'>
+          <td>Mini-T down</td>
+      </tr>
+      <tr id = 'miniCUp'>
+          <td>Mini-C up</td>
+      </tr>
+      <tr id = 'uhf'>
+          <td>UHF</td>
+      </tr>
+        
+    </table> <br>
+    <!-- define new source for each equipment -->
+    <body>
       <div class="row">
           <div class="column">
               <p>
@@ -141,41 +143,44 @@
           </p>
         </div>
     </div>
-    <table class="tb" id = 'AVs'>
-      <tr id="lauAdminNumber">
-        <th>Launchers</th>
-      </tr>
-      <tr id = 'laustatus'>
-        <td>Status</td>
-      </tr>
-      <tr id = 'laulaunches'>
-        <td>Launches</td>
-      </tr>
-  </table> <br>
+  </div>
+  <div>
+    <script src="lau.js"></script>
+    <table class="tb" id = 'Laus'>
+        <tr id="lauAdminNumber">
+          <th>Launchers</th>
+        </tr>
+        <tr id = 'laustatus'>
+          <td>Status</td>
+        </tr>
+        <tr id = 'laulaunches'>
+          <td>Launches</td>
+        </tr>
+    </table> <br>
 
- <body>
     <div class="row">
-        <div class="column">
-            <p>
-              <div class="navbar">
-                <div class="dropdown">
-                  <div class="dropbtn">Launcher Admin Number
-                    <div class="dropdown-content" id = 'lauDropDown'>
-                      <a class = 'button' onclick="lauInputMenu(false)">New Launcher</a>
+          <div class="column">
+              <p>
+                <div class="navbar">
+                  <div class="dropdown">
+                    <div class="dropbtn">Launcher Admin Number
+                      <div class="dropdown-content" id = 'lauDropDown'>
+                        <a class = 'button' onclick="lauEdit('edit', false)">New Launcher</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="lauInputs" class = "inputMenu">
-              </div>
-            </p>
+                <div id="lauInputs" class = "inputMenu">
+                </div>
+              </p>
+          </div>
+        <div class="column">
+          <p>
+            <textarea style="height: 300px; width: 75%;" id = 'lauNotes' placeholder="Notes" ></textarea><br>
+            <input type="text" id = "lauRemoveInput" placeholder="Admin Number for LAU Removal" style="width: 50%;">
+            <button type = 'button' onclick="lauEdit('remove')">Remove Launcher</button>
+          </p>
         </div>
-      <div class="column">
-        <p>
-          <textarea style="height: 300px; width: 75%;" id = 'lauNotes' placeholder="Notes" ></textarea><br>
-          <input type="text" id = "lauRemoveInput" placeholder="Admin Number for LAU Removal" style="width: 50%;">
-          <button type = 'button' onclick="lauRemove()">Remove Launcher</button>
-        </p>
-      </div>
+    </div>
   </div>
 </html>
