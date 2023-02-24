@@ -44,13 +44,18 @@ class AV {
             if (avList[i].adminNumber === tailNo) {
                 let oldAv = avList[i]
                 for (var i = 0; i < arrayOfVars.length; i++) {
-                    let updated = this[arrayOfVars[i]]
-                    document.getElementById(`${tailNo} ${arrayOfVars[i]}`).textContent = `${updated}`
+                    let updatedVar = this[arrayOfVars[i]]
+                    document.getElementById(`${tailNo} ${arrayOfVars[i]}`).textContent = `${updatedVar}`
                     console.log('getting notes...')
                     avNotes = document.getElementById('avNotes').value
-                    oldAv[arrayOfVars[i]] = updated
-                    equipmentList[0][i] = updated
+                    oldAv[arrayOfVars[i]] = updatedVar
                 }
+                for (var j = 0; j < equipmentList[0].length; j++) {
+                    if (tailNo === equipmentList[0][j]) {
+                        equipmentList[0].splice(j,1,oldAv)
+                    }
+                }
+                
             }
         }
     }
@@ -60,6 +65,15 @@ class AV {
             document.getElementById(this.adminNumber).remove()
             for (var i = 0; i < arrayOfVars.length; i++) {
                 document.getElementById(`${this.adminNumber} ${arrayOfVars[i]}`).remove()
+            }
+            //remove from dropdown
+            document.getElementById(`${this.adminNumber} Menu Item`).remove()
+            // remove from equipment list
+            for(var i = 0; i < equipmentList[0].length; i++) {
+                if (equipmentList[0][i].adminNumber === this.adminNumber) {
+                    // found the index for given av in list
+                    equipmentList[0].splice(i,1)
+                }
             }
             alert(`AV ${this.adminNumber} Removed`)
         } else {
