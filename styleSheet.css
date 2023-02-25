@@ -1,0 +1,104 @@
+.tb {
+  border-collapse: collapse;
+  width: 100%;
+}
+.tb th,
+.tb td {
+  padding: 5px;
+  border: solid 1px #1f1f1f;
+  background-color: beige;
+}
+.tb th {
+  background-color: lightblue;
+}
+.column {
+  box-sizing: border-box;
+  float: left;
+  width: 49%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.inputMenu {
+  display: grid;
+  width: 25%;
+}
+/* Nav bar */
+.navbar {
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+.navbar a {
+  float: left;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+.dropdown {
+  overflow: hidden;
+  text-align: center;
+}
+.dropdown .dropbtn {
+  font-size: 100%;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 9px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+/* Add a red background color to navbar links on hover */
+/* .navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;} */
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: aqua;
+  width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 9px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#lauNotes {
+  height: 300px;
+  width: 75%;
+}
+
+#avNotes {
+  height: 300px;
+  width: 75%;
+}
+
+#avRemoveInput {
+  width: 50%;
+}
+
+#lauRemoveInput {
+  width: 50%;
+}
