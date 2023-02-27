@@ -57,6 +57,8 @@ class Lau {
           .getElementById(`${this.adminNumber} ${lauArrayOfVars[i]}`)
           .remove();
       }
+      let menuItem = document.getElementById(`${this.adminNumber} Menu Item`);
+      menuItem.remove();
       alert(`Launcher ${this.adminNumber} Removed`);
     } else {
       alert(`Launcher ${this.adminNumber} doesnt exist!`);

@@ -85,7 +85,8 @@ class AV {
           .remove();
       }
       //remove from dropdown
-      document.getElementById(`${this.adminNumber} Menu Item`).remove();
+      let menuItem = document.getElementById(`${this.adminNumber} Menu Item`);
+      menuItem.remove();
       // remove from equipment list
       for (var i = 0; i < equipmentList[0].length; i++) {
         if (equipmentList[0][i].adminNumber === this.adminNumber) {

@@ -85,12 +85,7 @@
   display: block;
 }
 
-#lauNotes {
-  height: 300px;
-  width: 75%;
-}
-
-#avNotes {
+.equipmentNotes {
   height: 300px;
   width: 75%;
 }
@@ -101,4 +96,8 @@
 
 #lauRemoveInput {
   width: 50%;
+}
+
+#navigation {
+  align-items: end;
 }
