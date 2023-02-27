@@ -1,83 +1,15 @@
 <html>
-    <style>
-        .tb { border-collapse: collapse; width:100%; }
-        .tb th, .tb td { padding: 5px; border: solid 1px #1f1f1f; background-color:beige;}
-        .tb th { background-color: lightblue; }
-        .column {
-          box-sizing: border-box;
-          float: left;
-          width: 49%;
-        }
-        .row:after {
-        content: "";
-        display: table;
-        clear: both;
-        }
-        .inputMenu {
-          display: grid;
-          width: 25%;
-        }
-        /* Nav bar */
-        .navbar {
-        width: fit-content;
-        height: fit-content;
-        overflow: hidden;
-        background-color: #333;
-        font-family: Arial;
-        }
-        .navbar a {
-          float: left;
-          font-size: 20px;
-          color: white;
-          text-align: center;
-          text-decoration: none;
-        }
-        .dropdown {overflow: hidden; text-align: center;}
-        .dropdown .dropbtn {
-          font-size:100%;
-          border: none;
-          outline: none;
-          color: white;
-          padding:9px;
-          background-color: inherit;
-          font-family: inherit;
-          margin: 0;
-        }
-        /* Add a red background color to navbar links on hover */
-        /* .navbar a:hover, .dropdown:hover .dropbtn {
-          background-color: red;} */
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-          display: none;
-          position:absolute;
-          background-color: aqua;
-          width:150px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-        /* Links inside the dropdown */
-        .dropdown-content a {
-          float: none;
-          color: black;
-          padding: 9px;
-          text-decoration: none;
-          display: block;
-          text-align: center;
-        }
-
-        /* Add a grey background color to dropdown links on hover */
-        .dropdown-content a:hover {background-color: #ddd;}
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {display: block;}
-      </style>
     <head>
         <title> UAS Status Board </title>
-        <small style="float: right" id='update'></small>
+        <small></small>
         <script src="app.js"></script>
+        <link rel = "stylesheet" href="styleSheet.css">
     </head>
+    <a id = "navigation" href="statuses.html">Go to status Page</a>
 
   <div>
-    <script src="av.js"></script>
+    <script src="/equipmentScripts/av.js"></script>
+    <a id = "update"></a>
     <table class="tb" id = 'AVs'>
       <tr id="adminNumber">
         <th>AV's</th>
@@ -117,11 +49,9 @@
       </tr>
         
     </table> <br>
-    <!-- define new source for each equipment -->
     <body>
       <div class="row">
           <div class="column">
-              <p>
                 <div class="navbar">
                   <div class="dropdown">
                     <div class="dropbtn">AV Admin Number
@@ -133,19 +63,18 @@
                 </div>
                 <div id="avInputs" class = "inputMenu">
                 </div>
-              </p>
           </div>
         <div class="column">
           <p>
-            <textarea style="height: 300px; width: 75%;" id = 'avNotes' placeholder="Notes" ></textarea><br>
-            <input type="text" id = "avRemoveInput" placeholder="Admin Number for AV Removal" style="width: 50%;">
+            <textarea id = 'avNotes' class="equipmentNotes" placeholder="Notes" ></textarea><br>
+            <input type="text" id = "avRemoveInput" placeholder="Admin Number for AV Removal">
             <button type = 'button' onclick="avRemove()">Remove AV</button>
           </p>
         </div>
     </div>
-  </div>
+    <!-- Launchers -->
   <div>
-    <script src="lau.js"></script>
+    <script src="/equipmentScripts/lau.js"></script>
     <table class="tb" id = 'Laus'>
         <tr id="lauAdminNumber">
           <th>Launchers</th>
@@ -160,7 +89,6 @@
 
     <div class="row">
           <div class="column">
-              <p>
                 <div class="navbar">
                   <div class="dropdown">
                     <div class="dropbtn">Launcher Admin Number
@@ -172,14 +100,149 @@
                 </div>
                 <div id="lauInputs" class = "inputMenu">
                 </div>
-              </p>
           </div>
         <div class="column">
-          <p>
-            <textarea style="height: 300px; width: 75%;" id = 'lauNotes' placeholder="Notes" ></textarea><br>
-            <input type="text" id = "lauRemoveInput" placeholder="Admin Number for LAU Removal" style="width: 50%;">
+            <textarea id = 'lauNotes' class = "equipmentNotes" placeholder="Notes" ></textarea><br>
+            <input type="text" id = "lauRemoveInput" placeholder="Admin Number for LAU Removal">
             <button type = 'button' onclick="lauEdit('remove')">Remove Launcher</button>
-          </p>
+        </div>
+    </div>
+  </div>
+  <!-- UGCS -->
+  <div>
+    <script src="/equipmentScripts/ugcs.js"></script>
+    <table class="tb" id = 'ugcs'>
+        <tr id="ugcsAdminNumber">
+          <th>UGCS's</th>
+        </tr>
+        <tr id = 'ugcsstatus'>
+          <td>Status</td>
+        </tr>
+        <tr id = 'ugcspassword'>
+          <td>Passwords</td>
+        </tr>
+    </table> <br>
+
+    <div class="row">
+          <div class="column">
+                <div class="navbar">
+                  <div class="dropdown">
+                    <div class="dropbtn">UGCS Admin Number
+                      <div class="dropdown-content" id = 'ugcsDropDown'>
+                        <a class = 'button' onclick="ugcsEdit('edit', false)">New UGCS</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="ugcsInputs" class = "inputMenu">
+                </div>
+          </div>
+        <div class="column">
+            <textarea id = 'ugcsNotes' class = 'equipmentNotes' placeholder="Notes" ></textarea><br>
+            <input type="text" id = "ugcsRemoveInput" placeholder="Admin Number for UGCS Removal">
+            <button type = 'button' onclick="ugcsEdit('remove')">Remove UGCS</button>
+        </div>
+    </div>
+  </div>
+  <!-- PGCS -->
+  <div>
+    <script src="/equipmentScripts/pgcs.js"></script>
+    <table class="tb" id = 'pgcs'>
+        <tr id="pgcsAdminNumber">
+          <th>PGCS's</th>
+        </tr>
+        <tr id = 'pgcsstatus'>
+          <td>Status</td>
+        </tr>
+        <tr id = 'pgcspassword'>
+          <td>Passwords</td>
+        </tr>
+    </table> <br>
+
+    <div class="row">
+          <div class="column">
+                <div class="navbar">
+                  <div class="dropdown">
+                    <div class="dropbtn">PGCS Admin Number
+                      <div class="dropdown-content" id = 'pgcsDropDown'>
+                        <a class = 'button' onclick="pgcsEdit('edit', false)">New PGCS</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="pgcsInputs" class = "inputMenu">
+                </div>
+          </div>
+        <div class="column">
+            <textarea id = 'pgcsNotes' class = 'equipmentNotes' placeholder="Notes" ></textarea><br>
+            <input type="text" id = "pgcsRemoveInput" placeholder="Admin Number for PGCS Removal">
+            <button type = 'button' onclick="pgcsEdit('remove')">Remove PGCS</button>
+        </div>
+    </div>
+  </div>
+  <!-- PGDT -->
+  <div>
+    <script src="/equipmentScripts/pgdt.js"></script>
+    <table class="tb" id = 'pgdt'>
+        <tr id="pgdtAdminNumber">
+          <th>PGDT's</th>
+        </tr>
+        <tr id = 'pgdtstatus'>
+          <td>Status</td>
+        </tr>
+    </table> <br>
+
+    <div class="row">
+          <div class="column">
+                <div class="navbar">
+                  <div class="dropdown">
+                    <div class="dropbtn">PGDT Admin Number
+                      <div class="dropdown-content" id = 'pgdtDropDown'>
+                        <a class = 'button' onclick="pgdtEdit('edit', false)">New PGDT</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="pgdtInputs" class = "inputMenu">
+                </div>
+          </div>
+        <div class="column">
+            <textarea id = 'pgdtNotes' class = 'equipmentNotes' placeholder="Notes" ></textarea><br>
+            <input type="text" id = "pgdtRemoveInput" placeholder="Admin Number for PGDT Removal">
+            <button type = 'button' onclick="pgdtEdit('remove')">Remove PGDT</button>
+        </div>
+    </div>
+  </div>
+  <!-- UGDT -->
+  <div>
+    <script src="/equipmentScripts/ugdt.js"></script>
+    <table class="tb" id = 'ugdt'>
+        <tr id="ugdtAdminNumber">
+          <th>UGDT's</th>
+        </tr>
+        <tr id = 'ugdtstatus'>
+          <td>Status</td>
+        </tr>
+    </table> <br>
+
+    <div class="row">
+          <div class="column">
+                <div class="navbar">
+                  <div class="dropdown">
+                    <div class="dropbtn">UGDT Admin Number
+                      <div class="dropdown-content" id = 'ugdtDropDown'>
+                        <a class = 'button' onclick="ugdtEdit('edit', false)">New UGDT</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="ugdtInputs" class = "inputMenu">
+                </div>
+          </div>
+        <div class="column">
+            <textarea id = 'ugdtNotes' class = 'equipmentNotes' placeholder="Notes" ></textarea><br>
+            <input type="text" id = "ugdtRemoveInput" placeholder="Admin Number for UGDT Removal">
+            <button type = 'button' onclick="ugdtEdit('remove')">Remove UGDT</button>
         </div>
     </div>
   </div>
