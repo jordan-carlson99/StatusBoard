@@ -28,7 +28,7 @@ class UGDT {
     newMenuItem.textContent = this.adminNumber;
     document.getElementById("ugdtDropDown").appendChild(newMenuItem);
     ugdtList.push(this);
-    equipmentList[1].push(this);
+    equipmentList[5].push(this);
   }
 
   append() {
@@ -43,7 +43,7 @@ class UGDT {
           ).textContent = `${updated}`;
           ugdtNotes = document.getElementById("ugdtNotes").value;
           oldugdt[ugdtArrayOfVars[i]] = updated;
-          equipmentList[1][i] = updated;
+          equipmentList[5][i] = updated;
         }
       }
     }

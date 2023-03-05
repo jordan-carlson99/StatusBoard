@@ -29,7 +29,7 @@ class PGCS {
     newMenuItem.textContent = this.adminNumber;
     document.getElementById("pgcsDropDown").appendChild(newMenuItem);
     pgcsList.push(this);
-    equipmentList[1].push(this);
+    equipmentList[2].push(this);
   }
 
   append() {
@@ -44,7 +44,7 @@ class PGCS {
           ).textContent = `${updated}`;
           pgcsNotes = document.getElementById("pgcsNotes").value;
           oldpgcs[pgcsArrayOfVars[i]] = updated;
-          equipmentList[1][i] = updated;
+          equipmentList[2][i] = updated;
         }
       }
     }

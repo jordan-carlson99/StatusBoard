@@ -6,12 +6,13 @@ var intervalId = window.setInterval(function () {
         break;
       }
       read(pieceOfEquipment);
+      writeFileSync("./equipmentList.txt", equipList);
     }
   }
   document.getElementById("update").textContent = `Updated ${Date()}`;
 }, 6000);
 
-let equipmentList = [["avs"], ["laus"]];
+let equipmentList = [["avs"], ["laus"], ["pgcs"], ["pgdt"], ["ugcs"], ["ugdt"]];
 
 function read(equipment) {
   let adminNo = equipment.adminNumber;

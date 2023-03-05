@@ -29,7 +29,7 @@ class UGCS {
     newMenuItem.textContent = this.adminNumber;
     document.getElementById("ugcsDropDown").appendChild(newMenuItem);
     ugcsList.push(this);
-    equipmentList[1].push(this);
+    equipmentList[4].push(this);
   }
 
   append() {
@@ -44,7 +44,7 @@ class UGCS {
           ).textContent = `${updated}`;
           ugcsNotes = document.getElementById("ugcsNotes").value;
           oldugcs[ugcsArrayOfVars[i]] = updated;
-          equipmentList[1][i] = updated;
+          equipmentList[4][i] = updated;
         }
       }
     }

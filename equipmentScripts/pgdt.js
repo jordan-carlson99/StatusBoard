@@ -28,7 +28,7 @@ class PGDT {
     newMenuItem.textContent = this.adminNumber;
     document.getElementById("pgdtDropDown").appendChild(newMenuItem);
     pgdtList.push(this);
-    equipmentList[1].push(this);
+    equipmentList[3].push(this);
   }
 
   append() {
@@ -43,7 +43,7 @@ class PGDT {
           ).textContent = `${updated}`;
           pgdtNotes = document.getElementById("pgdtNotes").value;
           oldpgdt[pgdtArrayOfVars[i]] = updated;
-          equipmentList[1][i] = updated;
+          equipmentList[3][i] = updated;
         }
       }
     }

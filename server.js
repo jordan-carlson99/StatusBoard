@@ -1,18 +1,21 @@
-// uses node require method to import http module so it can transfer data over http
-const http = require("http");
-const fs = require("fs");
+const { readFileSync, writeFileSync } = require("fs");
 
-const hostname = "127.0.0.1";
-const port = 8080;
+const express = require("express");
 
-fs.readFile("index.html", function (err, html) {
-  if (err) {
-    throw err;
-  }
-  const server = http
-    .createServer(function (req, res) {
-      res.write(html);
-      res.end();
-    })
-    .listen(port, hostname);
+const app = express();
+
+app.set("view engine", "ejs");
+
+app.use(express.static("./"));
+app.get("/", (request, response) => {
+  const myFile = readFileSync("./equipmentList.txt", "utf-8");
+  console.log(`my files says : ${myFile}`);
+  response.render("index");
 });
+
+// setInterval(() => {
+//   //do
+//   writeFileSync("./equipmentList.txt", equipList);
+// }, 6000);
+
+app.listen(5000, () => console.log("listening on port 5,000"));

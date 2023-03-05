@@ -76,7 +76,7 @@ function lauEdit(buttonId, bool, lauNo) {
     let lauAdminNumber = document.createElement("input");
     lauAdminNumber.type = "text";
     lauAdminNumber.id = `lauAdminNumberInput`;
-    // if equipment doesn't exist:
+    // if equipment doesn't exist: dont search in the equipment list array
     if (bool === false) {
       lauAdminNumber.placeholder = "Admin Number";
       inputTable.appendChild(lauAdminNumber);
