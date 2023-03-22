@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer type="module" src="app.js"></script>
+  </head>
+  <body>
+    <div class="sideBar">
+      <button onclick="navBar()" class="sideBar-item" id="exitButton">
+        &times
+      </button>
+      <script>
+        function navBar() {
+          let sideBar = document.getElementsByClassName("sideBar")[0];
+          sideBar.classList.toggle("open");
+        }
+      </script>
+      <a class="sideBar-item" href="./index.html">Home</a>
+      <a class="sideBar-item" href="./views/addHours.html">Add Hours</a>
+      <a class="sideBar-item" href="./views/update.html">Update</a>
+      <a class="sideBar-item" href="./views/createNew.html">Create New</a>
+    </div>
+    <header style="border: 1px solid red">
+      contains essential data <button>Display Only</button>
+    </header>
+    <button onclick="navBar()" id="navBarButton">open</button>
+    <div id="data">
+      <button type="button" id="maketable">click</button>
+    </div>
+  </body>
+</html>
