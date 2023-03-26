@@ -39,16 +39,6 @@ caption {
   padding: 10px;
 }
 
-#data {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-#navBarButton {
-  position: absolute;
-}
-
 .sideBar {
   height: 100vh;
   width: 0;
@@ -70,6 +60,7 @@ caption {
 }
 
 .sideBar-item {
+  cursor: pointer;
   padding: 8px 8px 8px 8px;
   text-align: center;
   text-decoration: none;
@@ -82,17 +73,64 @@ caption {
   transition: 0.3s;
 }
 
+.sideBar-item:hover {
+  background-color: gray;
+  color: white;
+}
+
+#data {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#navBarButton {
+  position: absolute;
+}
+
 #exitButton {
   padding: 5%;
   top: 0;
   left: 0;
 }
 
-.sideBar-item:hover {
-  background-color: gray;
-  color: white;
-}
-
 #test {
   border: 1px solid rebeccapurple;
+}
+
+/*------------- Forms ----------- */
+
+.popUp {
+  display: block;
+  background-color: #fefefe;
+  z-index: 9;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.hoursForm {
+  width: 100%;
+  /* padding: 15px; */
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.hidden {
+  display: none;
+}
+
+#entryForms {
+  display: hidden;
+  position: fixed; /* Stay in place */
+  z-index: 8; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }

@@ -6,9 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/styles.css" />
-    <script defer type="module" src="/app.js"></script>
+    <script defer type="module" src="/test.js"></script>
   </head>
   <body>
+    <!-- <header style="border: 1px solid red">
+      contains essential data <button>Display Only</button>
+    </header> -->
+    <button onclick="navBar()" id="navBarButton">=</button>
+    <!-- entry forms -->
+    <div id="entryForms" class="hidden">
+      <div class="popUp hidden" id="hoursFormContainer">
+        <form action="/hours" method="post" id="hoursForm">
+          <h1>Add Hours</h1>
+          <label for="equipmentType-hoursForm">Equipment Type </label>
+          <select name="type" id="equipmentType-hoursForm">
+            <option value="test1">test1</option>
+            <option value="test2">teset2</option>
+            <option value="test3">test3</option>
+          </select>
+          <button type="submit">submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- blah -->
+
     <div class="sideBar">
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
@@ -20,14 +42,10 @@
         }
       </script>
       <a class="sideBar-item" href="/">Home</a>
-      <a class="sideBar-item" href="/addhours">Add Hours</a>
+      <a class="sideBar-item" id="addHours">Add Hours</a>
       <a class="sideBar-item" href="/update">Update</a>
       <a class="sideBar-item" href="/createnew">Create New</a>
     </div>
-    <header style="border: 1px solid red">
-      contains essential data <button>Display Only</button>
-    </header>
-    <button onclick="navBar()" id="navBarButton">open</button>
     <div id="data">
       <button type="button" id="maketable">click</button>
     </div>

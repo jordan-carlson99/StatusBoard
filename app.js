@@ -1,6 +1,5 @@
-export { equipmentList };
-let equipmentList = [];
-class equipment {
+export let equipmentList = [];
+export class equipment {
   constructor(type, adminNumber, hours, status) {
     this.type = type.toUpperCase();
     this.adminNumber = Number.parseInt(adminNumber) || "empty admin number";
@@ -8,26 +7,9 @@ class equipment {
     this.status = status.toUpperCase() || "undefined status";
   }
 }
-// create objects using contructor from equipment and event listeners
-let av;
-let av2 = new equipment("av", 2023, 54.5, "x");
-// av2.test = "24";
-let lau = new equipment("lau", 2023, 15, "/");
-let x = 1;
-let y = 1;
-
-document.getElementById("maketable").addEventListener("click", () => {
-  x++;
-  y++;
-  av = new equipment(`test ${y}`, x, 10, "x");
-  av.test = "44";
-  console.log(ifData(av2));
-  console.log(ifData(av));
-  console.log(ifData(lau));
-});
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.
-function ifData(equipment) {
+export function ifData(equipment) {
   if (!document.getElementById(equipment.type)) {
     createData(equipment);
     equipmentList.push(equipment);

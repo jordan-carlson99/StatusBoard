@@ -1,5 +1,6 @@
 {
   "name": "statusboard",
+  "type": "module",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
