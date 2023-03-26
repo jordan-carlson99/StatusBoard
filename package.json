@@ -1,12 +1,24 @@
 {
-  "type": "module",
-  "name": "refresh",
+  "name": "statusboard",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
   },
-  "author": "",
+  "author": "Jordan Carlson",
   "license": "ISC",
-  "description": ""
+  "description": "av readiness status board",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordan-carlson99/StatusBoard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jordan-carlson99/StatusBoard/issues"
+  },
+  "homepage": "https://github.com/jordan-carlson99/StatusBoard#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
 }
