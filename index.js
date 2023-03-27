@@ -45,7 +45,7 @@ app.get("/app.js", (req, res) => {
 //   });
 // });
 
-app.post("/hours", (req, res) => {
+app.post("/update", (req, res) => {
   // equipment list is empty, we need to either read from txt file or find a way to update
   console.log(equipmentList);
   // this entire thing needs to be put in app.js and imported then called

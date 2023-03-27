@@ -6,6 +6,12 @@ export class equipment {
     this.hours = Number.parseFloat(hours) || "undefined hours";
     this.status = status.toUpperCase() || "undefined status";
   }
+
+  /*
+
+  methods for mainpulating this data
+
+  */
 }
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.

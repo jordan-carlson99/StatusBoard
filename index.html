@@ -9,22 +9,31 @@
     <script defer type="module" src="/test.js"></script>
   </head>
   <body>
+    <script>
+      function modal() {
+        document
+          .getElementById("updateFormContainer")
+          .classList.toggle("hidden");
+        document.getElementById("entryForms").classList.toggle("hidden");
+      }
+      function navBar() {
+        let sideBar = document.getElementsByClassName("sideBar")[0];
+        sideBar.classList.toggle("open");
+      }
+    </script>
     <!-- <header style="border: 1px solid red">
       contains essential data <button>Display Only</button>
     </header> -->
     <button onclick="navBar()" id="navBarButton">=</button>
     <!-- entry forms -->
     <div id="entryForms" class="hidden">
-      <div class="popUp hidden" id="hoursFormContainer">
-        <form action="/hours" method="post" id="hoursForm">
-          <h1>Add Hours</h1>
-          <label for="equipmentType-hoursForm">Equipment Type </label>
-          <select name="type" id="equipmentType-hoursForm">
-            <!-- <option value="test1">test1</option>
-            <option value="test2">test2</option>
-            <option value="test3">test3</option> -->
-          </select>
-          <select name="adminNumber" id="adminNumber-hoursForm"></select>
+      <div class="popUp hidden" id="updateFormContainer">
+        <button onclick="modal()" class="exit">&times</button>
+        <form action="/update" method="post" id="updateForm">
+          <h1>Update Equipment</h1>
+          <label for="equipmentType-updateForm">Equipment Type </label>
+          <select name="type" id="equipmentType-updateForm"></select>
+          <select name="adminNumber" id="adminNumber-updateForm"></select>
           <button type="submit">submit</button>
         </form>
       </div>
@@ -36,14 +45,10 @@
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
       </button>
-      <script>
-        function navBar() {
-          let sideBar = document.getElementsByClassName("sideBar")[0];
-          sideBar.classList.toggle("open");
-        }
-      </script>
       <a class="sideBar-item" href="/">Home</a>
-      <a class="sideBar-item" id="addHours">Add Hours</a>
+      <a class="sideBar-item" id="updateEquipment" onclick="modal()"
+        >Update Equipment</a
+      >
       <a class="sideBar-item" href="/update">Update</a>
       <a class="sideBar-item" href="/createnew">Create New</a>
     </div>
