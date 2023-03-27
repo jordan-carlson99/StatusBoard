@@ -67,6 +67,11 @@ app.post("/update", (req, res) => {
   res.end(req.body.adminNumber);
 });
 
+app.post("/create", (req, res) => {
+  console.log(req.body);
+  res.end("complete");
+});
+
 app.get("/test.js", (req, res) => {
   res.sendFile(join(dir, "/test.js"), (err) => {
     if (err) {

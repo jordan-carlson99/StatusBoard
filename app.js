@@ -173,6 +173,89 @@ function syncTables(allEquipment) {
   return "synced all data";
 }
 
+// document
+//   .getElementById("updateEquipment")
+//   .addEventListener("click", updateForm);
+
+// creates modal for update form
+function updateForm() {
+  let typeSet = new Set();
+
+  // remove options + inputs if any
+  let optionArr = document
+    .getElementById("updateForm")
+    .querySelectorAll("option, input");
+  optionArr.forEach((option) => {
+    option.remove();
+  });
+
+  // fill in options for the equipment types
+  for (let i = 0; i < equipmentList.length; i++) {
+    // make a set then run the for loop on that set
+    console.log(equipmentList[i].type);
+    typeSet.add(equipmentList[i].type);
+  }
+
+  typeSet.forEach((type) => {
+    let typeListing = document.createElement("option");
+    typeListing.value = type;
+    typeListing.innerText = type;
+
+    // event for when type is selected to show admin numbers for that type
+    typeListing.addEventListener("click", (e) => {
+      // remove all the inputs if reselected
+      document
+        .getElementById("updateForm")
+        .querySelectorAll("input")
+        .forEach((inputs) => {
+          inputs.remove();
+        });
+      // remove the old admin numbers if reselected
+      document.getElementById("adminNumber-updateForm").innerHTML = "";
+      for (let i = 0; i < equipmentList.length; i++) {
+        if (equipmentList[i].type != e.target.value) {
+          continue;
+        }
+        let adminNumberListing = document.createElement("option");
+        adminNumberListing.value = equipmentList[i].adminNumber;
+        adminNumberListing.innerText = equipmentList[i].adminNumber;
+
+        // event listeners for that admin number to show categories and current data
+        adminNumberListing.addEventListener("click", () => {
+          // remove all inputs if reselected
+          document
+            .getElementById("updateForm")
+            .querySelectorAll("input")
+            .forEach((inputs) => {
+              inputs.remove();
+            });
+          let categories = Object.keys(equipmentList[i]);
+          for (let j = 0; j < categories.length; j++) {
+            if (categories[j] == "adminNumber" || categories[j] == "type") {
+              continue;
+            }
+            let text = document.createElement("input");
+            text.type = "text";
+            text.name = categories[j];
+            text.placeholder = `${categories[j]} (Current: ${
+              equipmentList[i][categories[j]]
+            })`;
+            document.getElementById("updateForm").appendChild(text);
+          }
+        });
+
+        document
+          .getElementById("adminNumber-updateForm")
+          .appendChild(adminNumberListing);
+      }
+    });
+
+    document
+      .getElementById("equipmentType-updateForm")
+      .appendChild(typeListing);
+  });
+}
+
 /*
 callback should take in equipment and pass it to ifData, if that returns false then it creates a new table with the first entry
 after that, if ifData returns false the callback should send it to add data which will append a row with the data to the table that was already generated.

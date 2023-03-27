@@ -10,10 +10,8 @@
   </head>
   <body>
     <script>
-      function modal() {
-        document
-          .getElementById("updateFormContainer")
-          .classList.toggle("hidden");
+      function modal(container) {
+        document.getElementById(container).classList.toggle("hidden");
         document.getElementById("entryForms").classList.toggle("hidden");
       }
       function navBar() {
@@ -21,14 +19,13 @@
         sideBar.classList.toggle("open");
       }
     </script>
-    <!-- <header style="border: 1px solid red">
-      contains essential data <button>Display Only</button>
-    </header> -->
     <button onclick="navBar()" id="navBarButton">=</button>
     <!-- entry forms -->
     <div id="entryForms" class="hidden">
       <div class="popUp hidden" id="updateFormContainer">
-        <button onclick="modal()" class="exit">&times</button>
+        <button onclick="modal('updateFormContainer')" class="exit">
+          &times
+        </button>
         <form action="/update" method="post" id="updateForm">
           <h1>Update Equipment</h1>
           <label for="equipmentType-updateForm">Equipment Type </label>
@@ -37,20 +34,35 @@
           <button type="submit">submit</button>
         </form>
       </div>
+      <div class="popUp hidden" id="createFormContainer">
+        <button onclick="modal('createFormContainer')" class="exit">
+          &times
+        </button>
+        <form action="/create" method="post" id="createForm">
+          <h1>Create New Equipment</h1>
+          <input type="text" placeholder="Equipment Type" id="equipmentType-createForm" name="type"></input>
+          <input type="text" placeholder="Admin Number" id="adminNumber-createForm" name="adminNumber"></input>
+          <input type="text" placeholder="Hours" id="hours-createForm" name="hours"></input>
+          <input type="text" placeholder="Status" id="status-createForm" name="status"></input>
+          <button type="submit">submit</button>
+        </form>
+        </div>
     </div>
 
-    <!-- blah -->
+    <!-- sidebar -->
 
     <div class="sideBar">
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
       </button>
       <a class="sideBar-item" href="/">Home</a>
-      <a class="sideBar-item" id="updateEquipment" onclick="modal()"
+      <a
+        class="sideBar-item"
+        id="updateEquipment"
+        onclick="modal('updateFormContainer'); navBar()"
         >Update Equipment</a
       >
-      <a class="sideBar-item" href="/update">Update</a>
-      <a class="sideBar-item" href="/createnew">Create New</a>
+      <a class="sideBar-item" id="createEquipment" onclick="modal('createFormContainer'); navBar()">Create New</a>
     </div>
     <div id="data">
       <button type="button" id="maketable">click</button>
