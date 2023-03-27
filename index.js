@@ -1,10 +1,12 @@
 import express from "express";
 import { resolve, join } from "path";
+import bodyParser from "body-parser";
 // import { equipmentList } from "./app.js";
-import { equipmentList } from "./app.js";
 const app = express();
 
 const dir = resolve("./");
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.sendFile(join(dir, "/index.html"), (err) => {
@@ -44,7 +46,25 @@ app.get("/app.js", (req, res) => {
 // });
 
 app.post("/hours", (req, res) => {
-  res.end("recieved");
+  // equipment list is empty, we need to either read from txt file or find a way to update
+  console.log(equipmentList);
+  // this entire thing needs to be put in app.js and imported then called
+  for (let i = 0; i < equipmentList.length; i++) {
+    console.log(i);
+    if (
+      req.body.type == equipmentList[i].type &&
+      req.body.adminNumber == equipmentList[i].adminNumber
+    ) {
+      for (let j = 0; j < Object.keys(equipmentList[i]).length; j++) {
+        console.log(equipmentList[i][Object.keys(equipmentList[i])[j]]);
+      }
+      console.log(equipmentList[i]);
+      equipmentList[i].type = req.body.type;
+      equipmentList[i].adminNumber = req.body.adminNumber;
+      console.log(equipmentList[i]);
+    }
+  }
+  res.end(req.body.adminNumber);
 });
 
 app.get("/test.js", (req, res) => {
