@@ -1,18 +1,42 @@
-// uses node require method to import http module so it can transfer data over http
-const http = require("http");
-const fs = require("fs");
+import express from "express";
+const app = express();
+import pg from "pg";
+const { Client } = pg;
+import dotenv from "dotenv";
+dotenv.config();
+import path from "path";
+const serverPort = 3000 || process.env.port;
+const pathToFile = path.resolve("./");
 
-const hostname = "127.0.0.1";
-const port = 8080;
+console.log(pathToFile);
 
-fs.readFile("index.html", function (err, html) {
+const client = new Client({
+  host: process.env.host || "localhost",
+  port: process.env.db_port || 3000,
+  database: process.env.database || "db",
+  user: process.env.user || "username",
+  password: process.env.password || "password",
+});
+// console.log(client);
+
+client.connect();
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(pathToFile, "./index.html"));
+});
+
+app.get("/styles.css", (req, res) => {
+  res.sendFile(path.join(pathToFile, "./styles.css"));
+});
+
+app.get("/app.js", (req, res) => {
+  res.sendFile(path.join(pathToFile, "./app.js"));
+});
+
+app.listen(serverPort, (err) => {
   if (err) {
-    throw err;
+    console.log(err);
+  } else {
+    console.log(`server running on port ${serverPort}`);
   }
-  const server = http
-    .createServer(function (req, res) {
-      res.write(html);
-      res.end();
-    })
-    .listen(port, hostname);
 });
