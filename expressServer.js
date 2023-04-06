@@ -34,6 +34,16 @@ app.post("/addEquipment", (req, res) => {
   );
 });
 
+app.patch("/appendEquipment/:adminNumber", (req, res) => {
+  client.query(
+    `UPDATE equipment
+    SET type = $1, equipment_status = $2
+    WHERE admin_number = '${req.params.adminNumber}'`,
+    [req.body.type, req.body.equipmentStatus]
+  );
+  res.send("success");
+});
+
 app.listen(3500, "127.0.0.10", () => {
   console.log("server Running on 3500");
 });
