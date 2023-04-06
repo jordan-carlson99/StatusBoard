@@ -15,8 +15,23 @@ const client = new Client({
 
 client.connect();
 
-app.get("/", (req, res) => {
-  res.send("server running");
+app.use(express.json());
+
+app.get("/:equipmentType", async (req, res) => {
+  console.log("fetching " + req.params.equipmentType.toUpperCase());
+  let response = await client.query(
+    `SELECT * FROM equipment WHERE type LIKE '%${req.params.equipmentType.toUpperCase()}%'`
+  );
+  res.send(response.rows);
+});
+
+app.post("/addEquipment", (req, res) => {
+  client.query(
+    `INSERT INTO equipment(type,admin_number,equipment_status)
+    VALUES
+    ($1,$2,$3)`,
+    [req.body.type, req.body.adminNumber, req.body.equipmentStatus]
+  );
 });
 
 app.listen(3500, "127.0.0.10", () => {
