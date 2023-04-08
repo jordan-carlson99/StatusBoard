@@ -28,6 +28,9 @@ function createEntryForm(equipment) {
   Object.keys(equipment).forEach((key) => {
     fieldStr += `<input type="text" name="${key}"placeholder="${key} Current: ${equipment[key]}"></input><br>`;
   });
-  document.getElementById("entryForm").innerHTML = fieldStr;
+  let submit = document.createElement("button");
+  submit.type = "submit";
+  submit.document.getElementById("entryForm").innerHTML = fieldStr;
+  document.getElementById("entryForm");
   return fieldStr;
 }
