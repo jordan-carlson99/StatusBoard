@@ -8,16 +8,25 @@
     <script defer src="/scripts/update.js"></script>
     <title>update</title>
   </head>
-  <body>
+  <body onload="selectOptions()">
+    <script>
+      function navBar() {
+        let sideBar = document.getElementsByClassName("sideBar")[0];
+        sideBar.classList.toggle("open");
+      }
+    </script>
     <div class="sideBar">
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
       </button>
-      <a class="sideBar-item" href="/index.html">Home</a>
-      <a class="sideBar-item" href="/views/addHours.html">Add Hours</a>
-      <a class="sideBar-item" href="/views/update.html">Update</a>
-      <a class="sideBar-item" href="/views/createNew.html">Create New</a>
+      <a class="sideBar-item" href="./">Home</a>
+      <!-- <a class="sideBar-item" href="./addHours">Add Hours</a> -->
+      <a class="sideBar-item" href="./update">Update</a>
+      <a class="sideBar-item" href="./createNew">Create New</a>
     </div>
     <button onclick="navBar()" id="navBarButton">open</button>
+    <div class="flex">
+      <select id="equipmentSelect"></select>
+    </div>
   </body>
 </html>
