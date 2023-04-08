@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles.css" />
     <script defer type="module" src="/app.js"></script>
   </head>
-  <body>
+  <body onload="testFunction()">
     <div class="sideBar">
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
@@ -19,16 +19,16 @@
           sideBar.classList.toggle("open");
         }
       </script>
-      <a class="sideBar-item" href="./index.html">Home</a>
-      <a class="sideBar-item" href="./views/addHours.html">Add Hours</a>
-      <a class="sideBar-item" href="./views/update.html">Update</a>
-      <a class="sideBar-item" href="./views/createNew.html">Create New</a>
+      <a class="sideBar-item" href="./">Home</a>
+      <!-- <a class="sideBar-item" href="./addHours">Add Hours</a> -->
+      <a class="sideBar-item" href="./update">Update</a>
+      <a class="sideBar-item" href="./createNew">Create New</a>
     </div>
     <header style="border: 1px solid red">
       contains essential data <button>Display Only</button>
     </header>
     <button onclick="navBar()" id="navBarButton">open</button>
-    <div id="data">
+    <div id="data" class="flex">
       <input type="text" id="search-equipment" placeholder="search equipment" />
       <button type="button" id="maketable">get from database</button>
     </div>

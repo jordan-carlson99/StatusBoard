@@ -33,6 +33,14 @@ app.get("/:equipmentType", async (req, res) => {
   res.send(response.rows);
 });
 
+app.get("/id/:id", async (req, res) => {
+  let response = await client.query(
+    `SELECT * FROM equipment WHERE equipment_id=$1`,
+    [req.params.id]
+  );
+  res.send(response.rows[0]);
+});
+
 app.post("/addEquipment", (req, res) => {
   client.query(
     `INSERT INTO equipment(type,admin_number,equipment_status)

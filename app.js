@@ -11,14 +11,16 @@ class equipment {
   }
 }
 
-document.getElementById("maketable").addEventListener("click", async () => {
-  let searchVal = document.getElementById("search-equipment").value;
-  let response = await fetch(`${databaseServerURL}/${searchVal}`);
-  let data = await response.json();
-  data.forEach((elem) => {
-    console.log(ifData(elem));
+function testFunction() {
+  document.getElementById("maketable").addEventListener("click", async () => {
+    let searchVal = document.getElementById("search-equipment").value;
+    let response = await fetch(`${databaseServerURL}/${searchVal}`);
+    let data = await response.json();
+    data.forEach((elem) => {
+      console.log(ifData(elem));
+    });
   });
-});
+}
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.
 function ifData(equipment) {
@@ -49,7 +51,7 @@ function ifData(equipment) {
 }
 
 // Create a new table for a new piece of equipment
-function createData(equipment) {
+export function createData(equipment) {
   let categories = programmaticCategories(equipment)[0];
   let data = programmaticCategories(equipment)[1];
   let newContainer = document.createElement("div");
@@ -70,7 +72,7 @@ function createData(equipment) {
 }
 
 // Add in a new row on a table for a new Admin Number
-function addData(equipment) {
+export function addData(equipment) {
   let data = programmaticCategories(equipment)[1];
   let newRow = document.createElement("tr");
   newRow.id = `${equipment.admin_number}-data`;
@@ -132,7 +134,7 @@ callback should take in equipment and pass it to ifData, if that returns false t
 after that, if ifData returns false the callback should send it to add data which will append a row with the data to the table that was already generated.
 */
 
-function programmaticCategories(equipment) {
+export function programmaticCategories(equipment) {
   // intent: build inner html string based on the key value pairs that are relevant
   // to the equipment
   let columnRow = "";
