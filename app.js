@@ -10,27 +10,12 @@ class equipment {
     this.status = status.toUpperCase() || "undefined status";
   }
 }
-// create objects using contructor from equipment and event listeners
-// let av;
-// let av2 = new equipment("av", 2023, 54.5, "x");
-// let lau = new equipment("lau", 2023, 15, "/");
-// let x = 1;
-// let y = 1;
 
 document.getElementById("maketable").addEventListener("click", async () => {
-  // x++;
-  // y++;
-  // av = new equipment(`test ${y}`, x, 10, "x");
-  // av.test = "44";
-  // console.log(ifData(av2));
-  // console.log(ifData(av));
-  // console.log(ifData(lau));
-  let response = await fetch(`${databaseServerURL}/LAU`);
+  let searchVal = document.getElementById("search-equipment").value;
+  let response = await fetch(`${databaseServerURL}/${searchVal}`);
   let data = await response.json();
-  // console.log(data);
-  // console.log(ifData(...data));
   data.forEach((elem) => {
-    // console.log(elem);
     console.log(ifData(elem));
   });
 });
@@ -81,8 +66,7 @@ function createData(equipment) {
   </table>
   `;
   document.getElementById("data").appendChild(newContainer);
-  // if there's more than the default keys, add them to the table
-  // appendNewCategory(equipment);
+  return newContainer;
 }
 
 // Add in a new row on a table for a new Admin Number
@@ -94,13 +78,13 @@ function addData(equipment) {
   document
     .getElementById(`${equipment.type}-equipmentTable`)
     .appendChild(newRow);
-  // appendNewCategory(equipment);
+  return newRow;
 }
 
 // Adjust the table data to match the current equipmentList data, also updates equipmentList
 function appendData(equipment) {
   // check if category is added
-  appendNewCategory(equipment);
+  // appendNewCategory(equipment);
   // get the current data for equipment
   let currentRow = document
     .getElementById(`${equipment.admin_number}-data`)
@@ -132,52 +116,6 @@ function appendData(equipment) {
         .appendChild(appendedDataCell);
     }
   });
-}
-
-// If a new category is added, create a new header
-function appendNewCategory(equipment) {
-  // if only default values exist, return
-  if (Object.keys(equipment).length <= 4) {
-    return;
-  }
-
-  // take in the categories node list and convert it to an array for comparing
-  let categories = document
-    .getElementById(`${equipment.type}-categories`)
-    .querySelectorAll("th");
-  let categoryList = [];
-  for (let i = 0; i < categories.length; i++) {
-    categoryList.push(categories[i].innerText);
-  }
-
-  // go through the object keys, if header already exists, then only add the data block
-  for (let i = 4; i < Object.keys(equipment).length; i++) {
-    // console.log(categoryList);
-    // check if the header was already created
-    if (categoryList.indexOf(Object.keys(equipment)[i]) < 0) {
-      //create the header and append it
-      let newCategory = document.createElement("th");
-      newCategory.innerText = Object.keys(equipment)[i];
-      document
-        .getElementById(`${equipment.type}-categories`)
-        .appendChild(newCategory);
-    } else {
-      // header exists, does the data exist?
-    }
-
-    // add that key to everything on the equipment list then send it to the append data function
-  }
-  for (let j = 0; j < Object.keys(equipment).length; j++) {
-    let currentKey = Object.keys(equipment)[j];
-    for (let i = 0; i < equipmentList.length; i++) {
-      if (
-        equipmentList[i][currentKey] == undefined &&
-        equipmentList[i].type == equipment.type
-      ) {
-        equipmentList[i][currentKey] = "no input";
-      }
-    }
-  }
 }
 
 // Ensure the tables reflect the current data in equipmentList

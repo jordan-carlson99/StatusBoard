@@ -21,10 +21,15 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/:equipmentType", async (req, res) => {
+  let response;
   console.log("fetching " + req.params.equipmentType.toUpperCase());
-  let response = await client.query(
-    `SELECT * FROM equipment WHERE type LIKE '%${req.params.equipmentType.toUpperCase()}%'`
-  );
+  if (req.params.equipmentType == "all") {
+    response = await client.query(`SELECT * FROM equipment`);
+  } else {
+    response = await client.query(
+      `SELECT * FROM equipment WHERE type LIKE '%${req.params.equipmentType.toUpperCase()}%'`
+    );
+  }
   res.send(response.rows);
 });
 
