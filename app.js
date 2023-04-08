@@ -75,6 +75,7 @@ function createData(equipment) {
     <tr id="${equipment.type}-categories">
     ${categories}
   </tr>
+  <tr id="${equipment.admin_number}-data">
   ${data}
     </tr>
   </table>
@@ -86,13 +87,15 @@ function createData(equipment) {
 
 // Add in a new row on a table for a new Admin Number
 function addData(equipment) {
+  let data = programmaticCategories(equipment)[1];
   let newRow = document.createElement("tr");
   newRow.id = `${equipment.admin_number}-data`;
-  newRow.innerHTML = `
-  <td>${equipment.admin_number}</td>
-  <td>${equipment.hours}</td>
-  <td>${equipment.equipment_status}</td>
-  </tr>`;
+  newRow.innerHTML = data;
+  // `
+  // <td>${equipment.admin_number}</td>
+  // <td>${equipment.hours}</td>
+  // <td>${equipment.equipment_status}</td>
+  // </tr>`;
   document
     .getElementById(`${equipment.type}-equipmentTable`)
     .appendChild(newRow);
