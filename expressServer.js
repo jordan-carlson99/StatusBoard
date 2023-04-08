@@ -4,6 +4,7 @@ import pg from "pg";
 const { Client } = pg;
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 
 const client = new Client({
   host: process.env.host || "localhost",
@@ -16,6 +17,8 @@ const client = new Client({
 client.connect();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.get("/:equipmentType", async (req, res) => {
   console.log("fetching " + req.params.equipmentType.toUpperCase());

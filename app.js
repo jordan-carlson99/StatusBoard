@@ -1,5 +1,7 @@
 export { equipmentList };
 let equipmentList = [];
+const databaseServerURL = "http://127.0.0.10:3500";
+
 class equipment {
   constructor(type, adminNumber, hours, status) {
     this.type = type.toUpperCase();
@@ -9,21 +11,28 @@ class equipment {
   }
 }
 // create objects using contructor from equipment and event listeners
-let av;
-let av2 = new equipment("av", 2023, 54.5, "x");
-// av2.test = "24";
-let lau = new equipment("lau", 2023, 15, "/");
-let x = 1;
-let y = 1;
+// let av;
+// let av2 = new equipment("av", 2023, 54.5, "x");
+// let lau = new equipment("lau", 2023, 15, "/");
+// let x = 1;
+// let y = 1;
 
-document.getElementById("maketable").addEventListener("click", () => {
-  x++;
-  y++;
-  av = new equipment(`test ${y}`, x, 10, "x");
-  av.test = "44";
-  console.log(ifData(av2));
-  console.log(ifData(av));
-  console.log(ifData(lau));
+document.getElementById("maketable").addEventListener("click", async () => {
+  // x++;
+  // y++;
+  // av = new equipment(`test ${y}`, x, 10, "x");
+  // av.test = "44";
+  // console.log(ifData(av2));
+  // console.log(ifData(av));
+  // console.log(ifData(lau));
+  let response = await fetch(`${databaseServerURL}/AV`);
+  let data = await response.json();
+  // console.log(...data);
+  // console.log(ifData(...data));
+  data.forEach((elem) => {
+    console.log(elem);
+    ifData(elem);
+  });
 });
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.
@@ -34,7 +43,7 @@ function ifData(equipment) {
     localStorage.setItem("equipmentList", equipmentList);
     return "the equipment type does not exist in the page";
   }
-  if (!document.getElementById(`${equipment.adminNumber}-data`)) {
+  if (!document.getElementById(`${equipment.admin_number}-data`)) {
     addData(equipment);
     equipmentList.push(equipment);
     localStorage.setItem("equipmentList", equipmentList);
@@ -44,7 +53,7 @@ function ifData(equipment) {
   // find the equipment in the list and update it's keys
   let indexOfEquipment;
   equipmentList.forEach((e, i) => {
-    if (e.adminNumber == equipment.adminNumber) {
+    if (e.adminNumber == equipment.admin_number) {
       indexOfEquipment = i;
     }
   });
@@ -66,10 +75,10 @@ function createData(equipment) {
     <th>Hours</th>
     <th>Status</th>
     </tr>
-    <tr id="${equipment.adminNumber}-data">
-    <td>${equipment.adminNumber}</td>
+    <tr id="${equipment.admin_number}-data">
+    <td>${equipment.admin_number}</td>
     <td>${equipment.hours}</td>
-    <td>${equipment.status}</td>
+    <td>${equipment.equipment_status}</td>
     </tr>
   </table>
   `;
@@ -81,11 +90,11 @@ function createData(equipment) {
 // Add in a new row on a table for a new Admin Number
 function addData(equipment) {
   let newRow = document.createElement("tr");
-  newRow.id = `${equipment.adminNumber}-data`;
+  newRow.id = `${equipment.admin_number}-data`;
   newRow.innerHTML = `
-  <td>${equipment.adminNumber}</td>
+  <td>${equipment.admin_number}</td>
   <td>${equipment.hours}</td>
-  <td>${equipment.status}</td>
+  <td>${equipment.equipment_status}</td>
   </tr>`;
   document
     .getElementById(`${equipment.type}-equipmentTable`)
@@ -99,7 +108,7 @@ function appendData(equipment) {
   appendNewCategory(equipment);
   // get the current data for equipment
   let currentRow = document
-    .getElementById(`${equipment.adminNumber}-data`)
+    .getElementById(`${equipment.admin_number}-data`)
     .querySelectorAll("td");
   // get the current catagories for equipment type
   let categories = document
@@ -124,7 +133,7 @@ function appendData(equipment) {
       let appendedDataCell = document.createElement("td");
       appendedDataCell.innerText = equipment[key];
       document
-        .getElementById(`${equipment.adminNumber}-data`)
+        .getElementById(`${equipment.admin_number}-data`)
         .appendChild(appendedDataCell);
     }
   });
