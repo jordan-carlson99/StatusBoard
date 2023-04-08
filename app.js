@@ -27,11 +27,11 @@ document.getElementById("maketable").addEventListener("click", async () => {
   // console.log(ifData(lau));
   let response = await fetch(`${databaseServerURL}/AV`);
   let data = await response.json();
-  // console.log(...data);
+  // console.log(data);
   // console.log(ifData(...data));
   data.forEach((elem) => {
-    console.log(elem);
-    ifData(elem);
+    // console.log(elem);
+    console.log(ifData(elem));
   });
 });
 
@@ -65,20 +65,17 @@ function ifData(equipment) {
 
 // Create a new table for a new piece of equipment
 function createData(equipment) {
+  let categories = programmaticCategories(equipment)[0];
+  let data = programmaticCategories(equipment)[1];
   let newContainer = document.createElement("div");
   newContainer.id = equipment.type;
   newContainer.innerHTML = `
   <h1 class="title">${equipment.type}</h1>
   <table id="${equipment.type}-equipmentTable">
     <tr id="${equipment.type}-categories">
-    <th>Admin Number</th>
-    <th>Hours</th>
-    <th>Status</th>
-    </tr>
-    <tr id="${equipment.admin_number}-data">
-    <td>${equipment.admin_number}</td>
-    <td>${equipment.hours}</td>
-    <td>${equipment.equipment_status}</td>
+    ${categories}
+  </tr>
+  ${data}
     </tr>
   </table>
   `;
@@ -198,3 +195,34 @@ function syncTables(allEquipment) {
 callback should take in equipment and pass it to ifData, if that returns false then it creates a new table with the first entry
 after that, if ifData returns false the callback should send it to add data which will append a row with the data to the table that was already generated.
 */
+
+/*
+card: 
+  <h1 class="title">${equipment.type}</h1>
+  <table id="${equipment.type}-equipmentTable">
+    <tr id="${equipment.type}-categories">
+    <th>Admin Number</th>
+    <th>Hours</th>
+    <th>Status</th>
+    </tr>
+    <tr id="${equipment.admin_number}-data">
+    <td>${equipment.admin_number}</td>
+    <td>${equipment.hours}</td>
+    <td>${equipment.equipment_status}</td>
+    </tr>
+  </table>
+*/
+
+function programmaticCategories(equipment) {
+  // intent: build inner html string based on the key value pairs that are relevant
+  // to the equipment
+  let columnRow = "";
+  let dataRow = "";
+  Object.keys(equipment).forEach((key) => {
+    if (equipment[key] != undefined) {
+      columnRow += `<th>${key}</th>`;
+      dataRow += `<td>${equipment[key]}</td>`;
+    }
+  });
+  return [columnRow, dataRow];
+}
