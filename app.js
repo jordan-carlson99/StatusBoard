@@ -25,7 +25,7 @@ document.getElementById("maketable").addEventListener("click", async () => {
   // console.log(ifData(av2));
   // console.log(ifData(av));
   // console.log(ifData(lau));
-  let response = await fetch(`${databaseServerURL}/AV`);
+  let response = await fetch(`${databaseServerURL}/LAU`);
   let data = await response.json();
   // console.log(data);
   // console.log(ifData(...data));
@@ -82,7 +82,7 @@ function createData(equipment) {
   `;
   document.getElementById("data").appendChild(newContainer);
   // if there's more than the default keys, add them to the table
-  appendNewCategory(equipment);
+  // appendNewCategory(equipment);
 }
 
 // Add in a new row on a table for a new Admin Number
@@ -91,15 +91,10 @@ function addData(equipment) {
   let newRow = document.createElement("tr");
   newRow.id = `${equipment.admin_number}-data`;
   newRow.innerHTML = data;
-  // `
-  // <td>${equipment.admin_number}</td>
-  // <td>${equipment.hours}</td>
-  // <td>${equipment.equipment_status}</td>
-  // </tr>`;
   document
     .getElementById(`${equipment.type}-equipmentTable`)
     .appendChild(newRow);
-  appendNewCategory(equipment);
+  // appendNewCategory(equipment);
 }
 
 // Adjust the table data to match the current equipmentList data, also updates equipmentList
@@ -199,32 +194,19 @@ callback should take in equipment and pass it to ifData, if that returns false t
 after that, if ifData returns false the callback should send it to add data which will append a row with the data to the table that was already generated.
 */
 
-/*
-card: 
-  <h1 class="title">${equipment.type}</h1>
-  <table id="${equipment.type}-equipmentTable">
-    <tr id="${equipment.type}-categories">
-    <th>Admin Number</th>
-    <th>Hours</th>
-    <th>Status</th>
-    </tr>
-    <tr id="${equipment.admin_number}-data">
-    <td>${equipment.admin_number}</td>
-    <td>${equipment.hours}</td>
-    <td>${equipment.equipment_status}</td>
-    </tr>
-  </table>
-*/
-
 function programmaticCategories(equipment) {
   // intent: build inner html string based on the key value pairs that are relevant
   // to the equipment
   let columnRow = "";
   let dataRow = "";
   Object.keys(equipment).forEach((key) => {
-    if (equipment[key] != undefined) {
+    console.log(equipment[key]);
+    if (equipment[key] != null) {
+      console.log("adding...");
       columnRow += `<th>${key}</th>`;
       dataRow += `<td>${equipment[key]}</td>`;
+    } else {
+      console.log("is null");
     }
   });
   return [columnRow, dataRow];
