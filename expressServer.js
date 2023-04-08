@@ -4,6 +4,7 @@ import pg from "pg";
 const { Client } = pg;
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 
 const client = new Client({
   host: process.env.host || "localhost",
@@ -17,11 +18,18 @@ client.connect();
 
 app.use(express.json());
 
+app.use(cors());
+
 app.get("/:equipmentType", async (req, res) => {
+  let response;
   console.log("fetching " + req.params.equipmentType.toUpperCase());
-  let response = await client.query(
-    `SELECT * FROM equipment WHERE type LIKE '%${req.params.equipmentType.toUpperCase()}%'`
-  );
+  if (req.params.equipmentType == "all") {
+    response = await client.query(`SELECT * FROM equipment`);
+  } else {
+    response = await client.query(
+      `SELECT * FROM equipment WHERE type LIKE '%${req.params.equipmentType.toUpperCase()}%'`
+    );
+  }
   res.send(response.rows);
 });
 
