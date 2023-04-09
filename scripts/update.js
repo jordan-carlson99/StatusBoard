@@ -30,7 +30,8 @@ function createEntryForm(equipment) {
   });
   let submit = document.createElement("button");
   submit.type = "submit";
-  submit.document.getElementById("entryForm").innerHTML = fieldStr;
-  document.getElementById("entryForm");
+  submit.innerText = "submit";
+  document.getElementById("entryForm").innerHTML = fieldStr;
+  document.getElementById("entryForm").appendChild(submit);
   return fieldStr;
 }

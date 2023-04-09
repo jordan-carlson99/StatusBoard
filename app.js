@@ -11,16 +11,14 @@ class equipment {
   }
 }
 
-function testFunction() {
-  document.getElementById("maketable").addEventListener("click", async () => {
-    let searchVal = document.getElementById("search-equipment").value;
-    let response = await fetch(`${databaseServerURL}/${searchVal}`);
-    let data = await response.json();
-    data.forEach((elem) => {
-      console.log(ifData(elem));
-    });
+document.getElementById("maketable").addEventListener("click", async () => {
+  let searchVal = document.getElementById("search-equipment").value;
+  let response = await fetch(`${databaseServerURL}/${searchVal}`);
+  let data = await response.json();
+  data.forEach((elem) => {
+    console.log(ifData(elem));
   });
-}
+});
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.
 function ifData(equipment) {
