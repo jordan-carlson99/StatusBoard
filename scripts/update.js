@@ -15,10 +15,6 @@ async function selectOptions() {
     });
     document.getElementById("equipmentSelect").appendChild(opt);
   });
-  document.getElementById("submit").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    appender("insert form data");
-  });
 }
 
 async function getEquipment(equipmentID) {
@@ -30,17 +26,39 @@ async function getEquipment(equipmentID) {
 function createEntryForm(equipment) {
   fieldStr = "";
   Object.keys(equipment).forEach((key) => {
-    fieldStr += `<input type="text" name="${key}"placeholder="${key} Current: ${equipment[key]}"></input><br>`;
+    fieldStr += `<label for="input-field-${equipment[key]}"> ${key} Current: ${equipment[key]}</label>
+    <input type="text" name="${key}" value="${equipment[key]}" placeholder="NULL (this will remove from statusboard completely)"id="input-field-${equipment[key]}"></input><br>`;
   });
   let submit = document.createElement("button");
   submit.type = "button";
   submit.id = "submit";
   submit.innerText = "submit";
+  submit.addEventListener("click", (e) => {
+    appender(e.target.parentNode);
+  });
   document.getElementById("entryForm").innerHTML = fieldStr;
   document.getElementById("entryForm").appendChild(submit);
   return fieldStr;
 }
 
-function appender(t) {
-  console.log(t);
+async function appender(form) {
+  let formData = new FormData(form);
+  let data = {};
+  for (let [key, value] of formData.entries()) {
+    if (value == "") {
+      value = null;
+    }
+    data[key] = value;
+  }
+  data = JSON.stringify(data);
+  fetch(`${databaseServerURL}/appendEquipment`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
+  // extend the body with admin number so query works all the time
+  console.log(data);
+  // console.log(form);
 }
