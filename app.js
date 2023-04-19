@@ -1,7 +1,3 @@
-export { equipmentList };
-let equipmentList = [];
-const databaseServerURL = "http://127.0.0.10:3500";
-
 class equipment {
   constructor(type, adminNumber, hours, status) {
     this.type = type.toUpperCase();
@@ -11,47 +7,36 @@ class equipment {
   }
 }
 
-function testFunction() {
-  document.getElementById("maketable").addEventListener("click", async () => {
-    let searchVal = document.getElementById("search-equipment").value;
-    let response = await fetch(`${databaseServerURL}/${searchVal}`);
-    let data = await response.json();
-    data.forEach((elem) => {
-      console.log(ifData(elem));
-    });
+// document.body.addEventListener("load", onLoad);
+
+document.getElementById("maketable").addEventListener("click", async () => {
+  let searchVal = document.getElementById("search-equipment").value;
+  let response = await fetch(`${databaseServerURL}/${searchVal}`);
+  let data = await response.json();
+  document.getElementById("data").innerHTML = "";
+  data.forEach((elem) => {
+    console.log(ifData(elem));
   });
-}
+});
 
 // takes in equipment and finds if its been added to the page, then passes it to the relevant function who will add to equipment list.
 function ifData(equipment) {
   if (!document.getElementById(equipment.type)) {
     createData(equipment);
-    equipmentList.push(equipment);
-    localStorage.setItem("equipmentList", equipmentList);
     return "the equipment type does not exist in the page";
   }
   if (!document.getElementById(`${equipment.admin_number}-data`)) {
     addData(equipment);
-    equipmentList.push(equipment);
-    localStorage.setItem("equipmentList", equipmentList);
     return "the adminNumber does not exist in the page";
   }
 
   // find the equipment in the list and update it's keys
-  let indexOfEquipment;
-  equipmentList.forEach((e, i) => {
-    if (e.adminNumber == equipment.admin_number) {
-      indexOfEquipment = i;
-    }
-  });
-  equipmentList[indexOfEquipment] = equipment;
   appendData(equipment);
-  localStorage.setItem("equipmentList", equipmentList);
   return "the equipment exists on the page";
 }
 
 // Create a new table for a new piece of equipment
-export function createData(equipment) {
+function createData(equipment) {
   let categories = programmaticCategories(equipment)[0];
   let data = programmaticCategories(equipment)[1];
   let newContainer = document.createElement("div");
@@ -72,7 +57,7 @@ export function createData(equipment) {
 }
 
 // Add in a new row on a table for a new Admin Number
-export function addData(equipment) {
+function addData(equipment) {
   let data = programmaticCategories(equipment)[1];
   let newRow = document.createElement("tr");
   newRow.id = `${equipment.admin_number}-data`;
@@ -85,9 +70,6 @@ export function addData(equipment) {
 
 // Adjust the table data to match the current equipmentList data, also updates equipmentList
 function appendData(equipment) {
-  // check if category is added
-  // appendNewCategory(equipment);
-  // get the current data for equipment
   let currentRow = document
     .getElementById(`${equipment.admin_number}-data`)
     .querySelectorAll("td");
@@ -129,12 +111,7 @@ function syncTables(allEquipment) {
   return "synced all data";
 }
 
-/*
-callback should take in equipment and pass it to ifData, if that returns false then it creates a new table with the first entry
-after that, if ifData returns false the callback should send it to add data which will append a row with the data to the table that was already generated.
-*/
-
-export function programmaticCategories(equipment) {
+function programmaticCategories(equipment) {
   // intent: build inner html string based on the key value pairs that are relevant
   // to the equipment
   let columnRow = "";

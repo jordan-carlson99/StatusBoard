@@ -15,6 +15,10 @@ async function selectOptions() {
     });
     document.getElementById("equipmentSelect").appendChild(opt);
   });
+  document.getElementById("submit").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    appender("insert form data");
+  });
 }
 
 async function getEquipment(equipmentID) {
@@ -29,8 +33,14 @@ function createEntryForm(equipment) {
     fieldStr += `<input type="text" name="${key}"placeholder="${key} Current: ${equipment[key]}"></input><br>`;
   });
   let submit = document.createElement("button");
-  submit.type = "submit";
-  submit.document.getElementById("entryForm").innerHTML = fieldStr;
-  document.getElementById("entryForm");
+  submit.type = "button";
+  submit.id = "submit";
+  submit.innerText = "submit";
+  document.getElementById("entryForm").innerHTML = fieldStr;
+  document.getElementById("entryForm").appendChild(submit);
   return fieldStr;
+}
+
+function appender(t) {
+  console.log(t);
 }

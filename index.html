@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/styles.css" />
-    <script defer type="module" src="/app.js"></script>
+    <script defer src="/app.js"></script>
   </head>
-  <body onload="testFunction()">
+  <body onload="onLoad()">
     <div class="sideBar">
       <button onclick="navBar()" class="sideBar-item" id="exitButton">
         &times
@@ -17,6 +17,14 @@
         function navBar() {
           let sideBar = document.getElementsByClassName("sideBar")[0];
           sideBar.classList.toggle("open");
+        }
+        const databaseServerURL = "http://127.0.0.10:3500";
+        async function onLoad() {
+          let response = await fetch(`${databaseServerURL}/all`);
+          let data = await response.json();
+          data.forEach((elem) => {
+            console.log(ifData(elem));
+          });
         }
       </script>
       <a class="sideBar-item" href="./">Home</a>
@@ -28,9 +36,8 @@
       contains essential data <button>Display Only</button>
     </header>
     <button onclick="navBar()" id="navBarButton">open</button>
-    <div id="data" class="flex">
-      <input type="text" id="search-equipment" placeholder="search equipment" />
-      <button type="button" id="maketable">get from database</button>
-    </div>
+    <input type="text" id="search-equipment" placeholder="search equipment" />
+    <button type="button" id="maketable">get from database</button>
+    <div id="data" class="flex"></div>
   </body>
 </html>

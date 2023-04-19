@@ -47,6 +47,7 @@ caption {
 
 #navBarButton {
   position: absolute;
+  top: 200px;
 }
 
 .sideBar {

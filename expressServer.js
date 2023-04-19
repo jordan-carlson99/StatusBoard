@@ -50,13 +50,22 @@ app.post("/addEquipment", (req, res) => {
   );
 });
 
-app.patch("/appendEquipment/:adminNumber", (req, res) => {
-  client.query(
-    `UPDATE equipment
-    SET type = $1, equipment_status = $2
-    WHERE admin_number = '${req.params.adminNumber}'`,
-    [req.body.type, req.body.equipmentStatus]
-  );
+app.patch("/appendEquipment", (req, res) => {
+  let keys = Object.keys(req.query);
+  console.log(req.query);
+  console.log(keys);
+  res.send("good");
+  keys.forEach((key) => {
+    if (req.body[key].toUpperCase() == "NULL" || req.body[key] == "") {
+      console.log("null it");
+      client.query(
+        `UPDATE equipment SET ${key} = NULL WHERE admin_number = CAST(${req.body.admin_number} AS varchar(255))`
+      );
+    } else {
+      client.query(`UPDATE equipment SET ${key} = '${req.body[key]}'
+      WHERE admin_number = CAST(${req.body.admin_number} AS varchar(255))`);
+    }
+  });
   res.send("success");
 });
 
