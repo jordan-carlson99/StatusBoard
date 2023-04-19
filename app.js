@@ -1,5 +1,3 @@
-// const databaseServerURL = "http://127.0.0.10:3500";
-
 class equipment {
   constructor(type, adminNumber, hours, status) {
     this.type = type.toUpperCase();
@@ -15,6 +13,7 @@ document.getElementById("maketable").addEventListener("click", async () => {
   let searchVal = document.getElementById("search-equipment").value;
   let response = await fetch(`${databaseServerURL}/${searchVal}`);
   let data = await response.json();
+  document.getElementById("data").innerHTML = "";
   data.forEach((elem) => {
     console.log(ifData(elem));
   });

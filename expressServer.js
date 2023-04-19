@@ -51,7 +51,10 @@ app.post("/addEquipment", (req, res) => {
 });
 
 app.patch("/appendEquipment", (req, res) => {
-  let keys = Object.keys(req.body);
+  let keys = Object.keys(req.query);
+  console.log(req.query);
+  console.log(keys);
+  res.send("good");
   keys.forEach((key) => {
     if (req.body[key].toUpperCase() == "NULL" || req.body[key] == "") {
       console.log("null it");
