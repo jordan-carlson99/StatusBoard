@@ -93,3 +93,8 @@ caption {
   background-color: gray;
   color: white;
 }
+
+#entryForm {
+  display: flex;
+  flex-direction: column;
+}
