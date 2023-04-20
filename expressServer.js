@@ -74,6 +74,12 @@ app.patch("/appendEquipment", (req, res) => {
   res.send("success");
 });
 
+app.post("/createColumn", (req, res) => {
+  console.log(req.body);
+  client.query(`ALTER TABLE equipment ADD $1 text`, [req.body.title]);
+  res.send("success");
+});
+
 app.listen(3500, "127.0.0.10", () => {
   console.log("server Running on 3500");
 });

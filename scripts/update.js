@@ -80,5 +80,32 @@ async function columnAdder(eventTarget) {
   <input type="text" name="title" placeholder="new title name"id="input-field-new-title"></input>
   <label for ="input-field-new-value">new entry value</label>
   <input type="text" name="value" placeholder="new value"id="input-field-new-value"></input>`;
+  let submit = document.createElement("button");
+  submit.type = "button";
+  submit.innerText = "submit";
+  submit.id = "new-field-submit";
+  submit.addEventListener("click", (e) => {
+    addField(e.target.parentNode);
+  });
+  form.appendChild(submit);
   document.getElementsByClassName("flex")[0].appendChild(form);
+}
+
+function addField(form) {
+  let formData = new FormData(form);
+  let data = {};
+  for (let [key, value] of formData.entries()) {
+    if (value == "") {
+      value = null;
+    }
+    data[key] = value;
+  }
+  data = JSON.stringify(data);
+  fetch(`${databaseServerURL}/createColumn`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
 }
