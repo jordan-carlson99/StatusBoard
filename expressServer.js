@@ -53,7 +53,6 @@ app.post("/addEquipment", (req, res) => {
 app.patch("/appendEquipment", (req, res) => {
   // console.log(req.body);
   let keys = Object.keys(req.body);
-  console.log(keys);
   keys.forEach((key) => {
     if (
       req.body[key] == null &&
@@ -64,8 +63,6 @@ app.patch("/appendEquipment", (req, res) => {
     ) {
       // do nothing
     } else if (req.body[key] == null) {
-      console.log(key);
-      console.log("null it");
       client.query(
         `UPDATE equipment SET ${key} = NULL WHERE admin_number = CAST(${req.body.admin_number} AS varchar(255))`
       );

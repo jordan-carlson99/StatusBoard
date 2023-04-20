@@ -29,6 +29,13 @@ function createEntryForm(equipment) {
     fieldStr += `<label for="input-field-${equipment[key]}"> ${key} Current: ${equipment[key]}</label>
     <input type="text" name="${key}" value="${equipment[key]}" placeholder="NULL (this will remove from statusboard completely)"id="input-field-${equipment[key]}"></input><br>`;
   });
+  let addColumn = document.createElement("button");
+  addColumn.type = "button";
+  addColumn.id = "add-column";
+  addColumn.innerText = "add new tracked item";
+  addColumn.addEventListener("click", (e) => {
+    columnAdder(e.target);
+  });
   let submit = document.createElement("button");
   submit.type = "button";
   submit.id = "submit";
@@ -38,11 +45,16 @@ function createEntryForm(equipment) {
   });
   document.getElementById("entryForm").innerHTML = fieldStr;
   document.getElementById("entryForm").appendChild(submit);
+  document.getElementById("entryForm").appendChild(addColumn);
   return fieldStr;
 }
 
 async function appender(form) {
   let formData = new FormData(form);
+  if (formData.get("admin_number") == "") {
+    alert("admin number cannot be blank!");
+    return;
+  }
   let data = {};
   for (let [key, value] of formData.entries()) {
     if (value == "") {
@@ -59,6 +71,14 @@ async function appender(form) {
     body: data,
   });
   // extend the body with admin number so query works all the time
-  console.log(data);
   // console.log(form);
+}
+
+async function columnAdder(eventTarget) {
+  let form = document.createElement("form");
+  form.innerHTML = `<label for ="input-field-new-title">new entry title</label>
+  <input type="text" name="title" placeholder="new title name"id="input-field-new-title"></input>
+  <label for ="input-field-new-value">new entry value</label>
+  <input type="text" name="value" placeholder="new value"id="input-field-new-value"></input>`;
+  document.getElementsByClassName("flex")[0].appendChild(form);
 }
