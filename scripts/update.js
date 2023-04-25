@@ -50,17 +50,10 @@ function createEntryForm(equipment) {
 }
 
 async function appender(form) {
-  let formData = new FormData(form);
-  if (formData.get("admin_number") == "") {
+  let data = formToObj(form);
+  if (data["admin_number"] == "") {
     alert("admin number cannot be blank!");
     return;
-  }
-  let data = {};
-  for (let [key, value] of formData.entries()) {
-    if (value == "") {
-      value = null;
-    }
-    data[key] = value;
   }
   data = JSON.stringify(data);
   fetch(`${databaseServerURL}/appendEquipment`, {
@@ -75,6 +68,7 @@ async function appender(form) {
 }
 
 async function columnAdder(eventTarget) {
+  // modified string for entry into db ( "_" instead of " ")
   let form = document.createElement("form");
   form.innerHTML = `<label for ="input-field-new-title">new entry title</label>
   <input type="text" name="title" placeholder="new title name"id="input-field-new-title"></input>
@@ -85,13 +79,27 @@ async function columnAdder(eventTarget) {
   submit.innerText = "submit";
   submit.id = "new-field-submit";
   submit.addEventListener("click", (e) => {
-    addField(e.target.parentNode);
+    addField(e.target.parentNode, eventTarget.parentNode[2].value);
   });
   form.appendChild(submit);
   document.getElementsByClassName("flex")[0].appendChild(form);
 }
 
-function addField(form) {
+async function addField(form, adminNumber) {
+  let data = formToObj(form);
+  data["admin_number"] = adminNumber;
+  data = JSON.stringify(data);
+  let redirectData = await fetch(`${databaseServerURL}/createColumn`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
+  console.log(redirectData);
+}
+
+function formToObj(formData) {
   let formData = new FormData(form);
   let data = {};
   for (let [key, value] of formData.entries()) {
@@ -100,12 +108,5 @@ function addField(form) {
     }
     data[key] = value;
   }
-  data = JSON.stringify(data);
-  fetch(`${databaseServerURL}/createColumn`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  });
+  return data;
 }
