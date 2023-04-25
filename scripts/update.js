@@ -71,9 +71,7 @@ async function columnAdder(eventTarget) {
   // modified string for entry into db ( "_" instead of " ")
   let form = document.createElement("form");
   form.innerHTML = `<label for ="input-field-new-title">new entry title</label>
-  <input type="text" name="title" placeholder="new title name"id="input-field-new-title"></input>
-  <label for ="input-field-new-value">new entry value</label>
-  <input type="text" name="value" placeholder="new value"id="input-field-new-value"></input>`;
+  <input type="text" name="title" placeholder="new title name"id="input-field-new-title"></input>`;
   let submit = document.createElement("button");
   submit.type = "button";
   submit.innerText = "submit";
@@ -99,7 +97,7 @@ async function addField(form, adminNumber) {
   console.log(redirectData);
 }
 
-function formToObj(formData) {
+function formToObj(form) {
   let formData = new FormData(form);
   let data = {};
   for (let [key, value] of formData.entries()) {

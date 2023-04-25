@@ -51,8 +51,6 @@ app.post("/addEquipment", (req, res) => {
 });
 
 app.patch("/appendEquipment", (req, res) => {
-  console.log("redirected");
-  // console.log(req.body);
   let keys = Object.keys(req.body);
   keys.forEach((key) => {
     if (
@@ -78,7 +76,7 @@ app.patch("/appendEquipment", (req, res) => {
 app.post("/createColumn", (req, res) => {
   console.log(req.body);
   client.query(`ALTER TABLE equipment ADD ${req.body.title} text`);
-  res.json(req.body);
+  res.send("success");
 });
 
 app.listen(3500, "127.0.0.10", () => {
