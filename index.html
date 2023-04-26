@@ -22,6 +22,7 @@
         async function onLoad() {
           let response = await fetch(`${databaseServerURL}/all`);
           let data = await response.json();
+          console.log(data);
           data.forEach((elem) => {
             console.log(ifData(elem));
           });
