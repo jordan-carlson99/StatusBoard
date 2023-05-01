@@ -22,10 +22,11 @@
         async function onLoad() {
           let response = await fetch(`${databaseServerURL}/all`);
           let data = await response.json();
-          console.log(data);
-          data.forEach((elem) => {
-            console.log(ifData(elem));
-          });
+          equipmentValidation(data);
+          // validateEquipmentList(data);
+          // data.forEach((elem) => {
+          //   console.log(ifData(elem));
+          // });
         }
       </script>
       <a class="sideBar-item" href="./">Home</a>

@@ -6,21 +6,122 @@ class equipment {
     this.status = status.toUpperCase() || "undefined status";
   }
 }
-
 /*
 categories = {
   av: [admin_number,type,equipment_status]
 
 }
+
+validate the equipment list obj to the list ifdata creates
 */
 
-const equipmentCategories = {};
+// function validateEquipmentList(dataList) {
+//   equipmentList = dataList;
+//   console.log(equipmentList);
+// }
+
+function defaultEquipment(keys, type) {
+  let obj = {};
+  keys.forEach((key) => {
+    if (key == "type") {
+      obj.type = type;
+    } else if (
+      key == "equipment_id" ||
+      key == "admin_number" ||
+      key == "equipment_status"
+    ) {
+      obj[key] = true;
+    } else {
+      obj[key] = false;
+    }
+  });
+  return obj;
+}
+// equipmentValidation (> defaultEquipment >) category setter > equipmentValidation > ifData ...
+function equipmentValidation(data) {
+  // pass whole array here, validate categories, then pass one at a time to if data
+  let typeList = [];
+  let keys = Object.keys(data[0]);
+  if (keys.length == 4) {
+    // no unique keys have been added
+    data.forEach((equipment) => {
+      ifData(equipment);
+    });
+    return;
+  }
+  data.forEach((equipment) => {
+    console.log(equipment);
+    let index = typeList.indexOf(equipment.type);
+    if (index > -1) {
+      // equipment exists
+    } else {
+      let equipmentCat = defaultEquipment(keys, equipment.type);
+      equipmentCat = categorySetter(equipmentCat, data, keys);
+      typeList.push(equipmentCat);
+    }
+  });
+  data = dataResolver(typeList, data, keys);
+  data.forEach((equipment) => {
+    ifData(equipment);
+  });
+}
+
+function categorySetter(equipmentCat, data, keys) {
+  data.forEach((equipment) => {
+    if (equipment.type == equipmentCat.type) {
+      keys.forEach((key) => {
+        if (equipment[key] != null && equipment[key] != "" && key != "type") {
+          equipmentCat[key] = true;
+        }
+      });
+    }
+  });
+  return equipmentCat;
+}
+
+function dataResolver(typeList, data, keys) {
+  data.forEach((equipment) => {
+    typeList.forEach((equipmentCat) => {
+      if (equipment.type == equipmentCat.type) {
+        keys.forEach((key) => {
+          if (equipmentCat[key] == false) {
+            delete equipment[key];
+          }
+        });
+      }
+    });
+  });
+  return data;
+}
+
+/*
+equipmentCat = 
+{
+  "equipment_id": true, 
+  "type": "AV",
+  "admin_number": true,
+  "equipment_status": true,
+  ^^ always true
+  "title": true,
+  "thinger": false
+}
+
+equipment = 
+{
+  "equipment_id": 1,
+  "type": "AV",
+  "admin_number": "1234",
+  "equipment_status": "X",
+  "title": blah,
+}
+*/
 // document.body.addEventListener("load", onLoad);
 
 document.getElementById("maketable").addEventListener("click", async () => {
   let searchVal = document.getElementById("search-equipment").value;
   let response = await fetch(`${databaseServerURL}/${searchVal}`);
   let data = await response.json();
+  mostRecentData = data;
   document.getElementById("data").innerHTML = "";
   data.forEach((elem) => {
     console.log(ifData(elem));
@@ -126,6 +227,4 @@ function programmaticCategories(equipment) {
 // returns objs with values of true or false if ANY equipment has a val
 
 // return keys to exclude
-function initializeCategories(equipmentData) {
-  console.log(equipmentData);
-}
+function initializeCategories(equipment) {}
